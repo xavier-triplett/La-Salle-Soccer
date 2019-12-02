@@ -7,7 +7,7 @@ import { SearchOptions } from '../models/searchOptions.model';
 })
 export class GameService {
 
-	public url = "https://localhost:44354/api";
+	public url = "https://localhost:44326/api";
 
 	constructor(private http: HttpClient) { }
 

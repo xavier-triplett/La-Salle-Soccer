@@ -1,93 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
-using Final.Models;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Capstone.Models;
 
-namespace Final.Controllers
+namespace Capstone.Controllers
 {
-	[ApiController]
-	[Route("api/[controller]")]
-	public class coachesController : ControllerBase
-	{
-        private Capstone_ProjectEntities db = new Capstone_ProjectEntities();
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CoachesController : ControllerBase
+    {
+        private readonly CoachContext _context;
 
-        // GET: api/coaches
-        public List<coach> Getcoaches()
+        public CoachesController(CoachContext context)
         {
-			IQueryable<coach> items = db.coaches
-				.Include(x => x.user);
-
-
-            List<coach> coaches = items.ToList();
-
-            coaches.ForEach(x =>
-			{
-				x.FirstName = x.user.FirstName;
-				x.LastName = x.user.LastName;
-				x.DateOfBirth = (DateTime)x.user.DateOfBirth;
-				x.Gender = x.user.Gender;
-			});
-
-			return coaches;
+            _context = context;
         }
 
-        // GET: api/coaches/5
-        [ResponseType(typeof(coach))]
-        public IHttpActionResult Getcoach(long id)
+        // GET: api/Coaches
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Coach>>> GetCoach()
         {
-			coach coach = db.coaches
-				.Include(x => x.user)
-				.Where(x => x.CoachId == id)
-				.FirstOrDefault();
-
-			if (coach == null)
-			{
-				return NotFound();
-			}
-
-			coach.FirstName = coach.user.FirstName;
-			coach.LastName = coach.user.LastName;
-			coach.DateOfBirth = (DateTime) coach.user.DateOfBirth;
-			coach.Gender = coach.user.Gender;
-
-
-
-            return Ok(coach);
+            return await _context.Coach.ToListAsync();
         }
 
-        // PUT: api/coaches/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Putcoach(long id, coach coach)
+        // GET: api/Coaches/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Coach>> GetCoach(long id)
         {
-            if (!ModelState.IsValid)
+            var coach = await _context.Coach.FindAsync(id);
+
+            if (coach == null)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
 
+            return coach;
+        }
+
+        // PUT: api/Coaches/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCoach(long id, Coach coach)
+        {
             if (id != coach.CoachId)
             {
                 return BadRequest();
             }
 
-            db.Entry(coach).State = EntityState.Modified;
+            _context.Entry(coach).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!coachExists(id))
+                if (!CoachExists(id))
                 {
                     return NotFound();
                 }
@@ -97,52 +70,40 @@ namespace Final.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return NoContent();
         }
 
-        // POST: api/coaches
-        [ResponseType(typeof(coach))]
-        public IHttpActionResult Postcoach(coach coach)
+        // POST: api/Coaches
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPost]
+        public async Task<ActionResult<Coach>> PostCoach(Coach coach)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            _context.Coach.Add(coach);
+            await _context.SaveChangesAsync();
 
-            db.coaches.Add(coach);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = coach.CoachId }, coach);
+            return CreatedAtAction("GetCoach", new { id = coach.CoachId }, coach);
         }
 
-        // DELETE: api/coaches/5
-        [ResponseType(typeof(coach))]
-        public IHttpActionResult Deletecoach(long id)
+        // DELETE: api/Coaches/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Coach>> DeleteCoach(long id)
         {
-            coach coach = db.coaches.Find(id);
+            var coach = await _context.Coach.FindAsync(id);
             if (coach == null)
             {
                 return NotFound();
             }
 
-            db.coaches.Remove(coach);
-            db.SaveChanges();
+            _context.Coach.Remove(coach);
+            await _context.SaveChangesAsync();
 
-            return Ok(coach);
+            return coach;
         }
 
-        protected override void Dispose(bool disposing)
+        private bool CoachExists(long id)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool coachExists(long id)
-        {
-            return db.coaches.Count(e => e.CoachId == id) > 0;
+            return _context.Coach.Any(e => e.CoachId == id);
         }
     }
 }

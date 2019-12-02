@@ -117,6 +117,12 @@ footer div span {
 body {
   background-color: rgb(4, 28, 89);
 }
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 /* Responsive Styles */
 @media screen and (max-width: 767px) {
 

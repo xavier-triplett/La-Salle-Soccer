@@ -6,7 +6,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class CoachService {
 
-	public url = "https://localhost:44354/api";
+	public url = "https://localhost:44326/api";
 
 	constructor(private http: HttpClient) { }
 

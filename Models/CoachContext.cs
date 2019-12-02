@@ -1,19 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Final.Models
+namespace Capstone.Models
 {
-	public class CoachContext : Microsoft.EntityFrameworkCore.DbContext
+	public class CoachContext : DbContext
 	{
 		public CoachContext(DbContextOptions<CoachContext> options) : base(options)
 		{
 
 		}
 
-		public Microsoft.EntityFrameworkCore.DbSet<Coach> Coach { get; set; }
+		public DbSet<Coach> Coach { get; set; }
 	}
 }

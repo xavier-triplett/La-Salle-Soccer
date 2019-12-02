@@ -1,72 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
-using Final.Models;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Capstone.Models;
 
-namespace Final.Controllers
+namespace Capstone.Controllers
 {
-	[ApiController]
-	[Route("api/[controller]")]
-	public class usersController : ControllerBase
-	{
-        private Capstone_ProjectEntities db = new Capstone_ProjectEntities();
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UsersController : ControllerBase
+    {
+        private readonly UserContext _context;
 
-        // GET: api/users
-        public List<user> Getusers()
+        public UsersController(UserContext context)
         {
-            IQueryable<user> items = db.users;
-
-            List<user> users = items.ToList();
-
-            return users;
+            _context = context;
         }
 
-        // GET: api/users/5
-        [ResponseType(typeof(user))]
-        public IHttpActionResult Getuser(long id)
+        // GET: api/Users
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            user user = db.users.Find(id);
+            return await _context.User.ToListAsync();
+        }
+
+        // GET: api/Users/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUser(long id)
+        {
+            var user = await _context.User.FindAsync(id);
+
             if (user == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
+            return user;
         }
 
-        // PUT: api/users/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Putuser(long id, user user)
+        // PUT: api/Users/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutUser(long id, User user)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             if (id != user.UserId)
             {
                 return BadRequest();
             }
 
-            db.Entry(user).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!userExists(id))
+                if (!UserExists(id))
                 {
                     return NotFound();
                 }
@@ -76,67 +70,40 @@ namespace Final.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return NoContent();
         }
 
-        // POST: api/users
-        [ResponseType(typeof(user))]
-        public IHttpActionResult Postuser(user user)
+        // POST: api/Users
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPost]
+        public async Task<ActionResult<User>> PostUser(User user)
         {
-            List<user> users = db.users.ToList();
-            Boolean duplicateUsername = false;
-            users.ForEach(x =>
-            {
-                if (x.Username == user.Username)
-                {
-                    duplicateUsername = true;
-                }
-            });
+            _context.User.Add(user);
+            await _context.SaveChangesAsync();
 
-            if (duplicateUsername)
-            {
-                return StatusCode(HttpStatusCode.InternalServerError);
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.users.Add(user);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = user.UserId }, user);
+            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
-        // DELETE: api/users/5
-        [ResponseType(typeof(user))]
-        public IHttpActionResult Deleteuser(long id)
+        // DELETE: api/Users/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<User>> DeleteUser(long id)
         {
-            user user = db.users.Find(id);
+            var user = await _context.User.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            db.users.Remove(user);
-            db.SaveChanges();
+            _context.User.Remove(user);
+            await _context.SaveChangesAsync();
 
-            return Ok(user);
+            return user;
         }
 
-        protected override void Dispose(bool disposing)
+        private bool UserExists(long id)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool userExists(long id)
-        {
-            return db.users.Count(e => e.UserId == id) > 0;
+            return _context.User.Any(e => e.UserId == id);
         }
     }
 }

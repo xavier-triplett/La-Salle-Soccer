@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class UserService {
 
 	public headers: HttpHeaders = new HttpHeaders();
-	public url = "https://localhost:44354/api";
+	public url = "https://localhost:44326/api";
 
 	constructor(
 		private http: HttpClient

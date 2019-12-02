@@ -1,88 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
-using Final.Models;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Capstone.Models;
 
-namespace Final.Controllers
+namespace Capstone.Controllers
 {
-	[ApiController]
-	[Route("api/[controller]")]
-	public class gamesController : ControllerBase
-	{
-        private Capstone_ProjectEntities db = new Capstone_ProjectEntities();
+    [Route("api/[controller]")]
+    [ApiController]
+    public class GamesController : ControllerBase
+    {
+        private readonly GameContext _context;
 
-        // GET: api/games
-        public List<game> Getgames()
+        public GamesController(GameContext context)
         {
-			IQueryable<game> items = db.games
-				.Include(x => x.team)
-				.Include(x => x.team1);
-
-            List<game> games = items.ToList();
-
-            games.ForEach(x =>
-			{
-				x.HomeTeamName = x.team.Name;
-				x.AwayTeamName = x.team1.Name;
-			});
-
-            return games;
+            _context = context;
         }
 
-        // GET: api/games/5
-        [ResponseType(typeof(game))]
-        public IHttpActionResult Getgame(long id)
+        // GET: api/Games
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Game>>> GetGame()
         {
-			game game = db.games
-				.Include(x => x.team)
-				.Include(x => x.team1)
-				.Where(x => x.GameId == id)
-				.FirstOrDefault();
-
-			if (game == null)
-			{
-				return NotFound();
-			}
-
-			game.HomeTeamName = game.team.Name;
-			game.AwayTeamName = game.team1.Name;
-
-            return Ok(game);
+            return await _context.Game.ToListAsync();
         }
 
-        // PUT: api/games/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Putgame(long id, game game)
+        // GET: api/Games/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Game>> GetGame(long id)
         {
-            if (!ModelState.IsValid)
+            var game = await _context.Game.FindAsync(id);
+
+            if (game == null)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
 
+            return game;
+        }
+
+        // PUT: api/Games/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutGame(long id, Game game)
+        {
             if (id != game.GameId)
             {
                 return BadRequest();
             }
 
-            db.Entry(game).State = EntityState.Modified;
+            _context.Entry(game).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!gameExists(id))
+                if (!GameExists(id))
                 {
                     return NotFound();
                 }
@@ -92,52 +70,40 @@ namespace Final.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return NoContent();
         }
 
-        // POST: api/games
-        [ResponseType(typeof(game))]
-        public IHttpActionResult Postgame(game game)
+        // POST: api/Games
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPost]
+        public async Task<ActionResult<Game>> PostGame(Game game)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            _context.Game.Add(game);
+            await _context.SaveChangesAsync();
 
-            db.games.Add(game);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = game.GameId }, game);
+            return CreatedAtAction("GetGame", new { id = game.GameId }, game);
         }
 
-        // DELETE: api/games/5
-        [ResponseType(typeof(game))]
-        public IHttpActionResult Deletegame(long id)
+        // DELETE: api/Games/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Game>> DeleteGame(long id)
         {
-            game game = db.games.Find(id);
+            var game = await _context.Game.FindAsync(id);
             if (game == null)
             {
                 return NotFound();
             }
 
-            db.games.Remove(game);
-            db.SaveChanges();
+            _context.Game.Remove(game);
+            await _context.SaveChangesAsync();
 
-            return Ok(game);
+            return game;
         }
 
-        protected override void Dispose(bool disposing)
+        private bool GameExists(long id)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool gameExists(long id)
-        {
-            return db.games.Count(e => e.GameId == id) > 0;
+            return _context.Game.Any(e => e.GameId == id);
         }
     }
 }

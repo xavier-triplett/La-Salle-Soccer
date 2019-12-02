@@ -1,96 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
-using Final.Models;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Capstone.Models;
 
-namespace Final.Controllers
+namespace Capstone.Controllers
 {
-	[ApiController]
-	[Route("api/[controller]")]
-	public class playersController : ControllerBase
-	{
-        private Capstone_ProjectEntities db = new Capstone_ProjectEntities();
+    [Route("api/[controller]")]
+    [ApiController]
+    public class PlayersController : ControllerBase
+    {
+        private readonly PlayerContext _context;
 
-        // GET: api/players
-        public List<player> Getplayers()
+        public PlayersController(PlayerContext context)
         {
-			IQueryable<player> items = db.players
-				.Include(x => x.user)
-				.Include(x => x.team);
-
-            
-            List<player> players = items.ToList();
-
-            players.ForEach(x =>
-			{
-				x.FirstName = x.user.FirstName;
-				x.LastName = x.user.LastName;
-				x.DateOfBirth = (DateTime)x.user.DateOfBirth;
-				x.Gender = x.user.Gender;
-				x.TeamName = x.team.Name;
-			});
-			
-			return players;
+            _context = context;
         }
 
-        // GET: api/players/5
-        [ResponseType(typeof(player))]
-        public IHttpActionResult Getplayer(long id)
+        // GET: api/Players
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Player>>> GetPlayer()
         {
-			player player = db.players
-				.Include(x => x.user)
-				.Include(x => x.team)
-				.Where(x => x.PlayerId == id)
-				.FirstOrDefault();
-
-			if (player == null)
-			{
-				return NotFound();
-			}
-
-			player.FirstName = player.user.FirstName;
-			player.LastName = player.user.LastName;
-			player.DateOfBirth = (DateTime)player.user.DateOfBirth;
-			player.Gender = player.user.Gender;
-			player.TeamName = player.team.Name;
-
-
-            return Ok(player);
+            return await _context.Player.ToListAsync();
         }
 
-        // PUT: api/players/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Putplayer(long id, player player)
+        // GET: api/Players/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Player>> GetPlayer(long id)
         {
-            if (!ModelState.IsValid)
+            var player = await _context.Player.FindAsync(id);
+
+            if (player == null)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
 
+            return player;
+        }
+
+        // PUT: api/Players/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutPlayer(long id, Player player)
+        {
             if (id != player.PlayerId)
             {
                 return BadRequest();
             }
 
-            db.Entry(player).State = EntityState.Modified;
+            _context.Entry(player).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!playerExists(id))
+                if (!PlayerExists(id))
                 {
                     return NotFound();
                 }
@@ -100,52 +70,40 @@ namespace Final.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return NoContent();
         }
 
-        // POST: api/players
-        [ResponseType(typeof(player))]
-        public IHttpActionResult Postplayer(player player)
+        // POST: api/Players
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPost]
+        public async Task<ActionResult<Player>> PostPlayer(Player player)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            _context.Player.Add(player);
+            await _context.SaveChangesAsync();
 
-            db.players.Add(player);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = player.PlayerId }, player);
+            return CreatedAtAction("GetPlayer", new { id = player.PlayerId }, player);
         }
 
-        // DELETE: api/players/5
-        [ResponseType(typeof(player))]
-        public IHttpActionResult Deleteplayer(long id)
+        // DELETE: api/Players/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Player>> DeletePlayer(long id)
         {
-            player player = db.players.Find(id);
+            var player = await _context.Player.FindAsync(id);
             if (player == null)
             {
                 return NotFound();
             }
 
-            db.players.Remove(player);
-            db.SaveChanges();
+            _context.Player.Remove(player);
+            await _context.SaveChangesAsync();
 
-            return Ok(player);
+            return player;
         }
 
-        protected override void Dispose(bool disposing)
+        private bool PlayerExists(long id)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool playerExists(long id)
-        {
-            return db.players.Count(e => e.PlayerId == id) > 0;
+            return _context.Player.Any(e => e.PlayerId == id);
         }
     }
 }

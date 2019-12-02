@@ -1,75 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
-using Final.Models;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Capstone.Models;
 
-namespace Final.Controllers
+namespace Capstone.Controllers
 {
-	[ApiController]
-	[Route("api/[controller]")]
-	public class addressesController : ControllerBase
-	{
-        private Capstone_ProjectEntities db = new Capstone_ProjectEntities();
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AddressesController : ControllerBase
+    {
+        private readonly AddressContext _context;
 
-        // GET: api/addresses
-        public List<> Getaddresses()
+        public AddressesController(AddressContext context)
         {
-            return db.addresses.ToList();
+            _context = context;
         }
 
-        // GET: api/addresses/5
-        [ResponseType(typeof(address))]
-        public IHttpActionResult Getaddress(long id)
+        // GET: api/Addresses
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Address>>> GetAddress()
         {
-            address address = db.addresses.Find(id);
+            return await _context.Address.ToListAsync();
+        }
+
+        // GET: api/Addresses/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Address>> GetAddress(long id)
+        {
+            var address = await _context.Address.FindAsync(id);
+
             if (address == null)
             {
                 return NotFound();
             }
 
-            return Ok(address);
+            return address;
         }
 
-        // PUT: api/addresses/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Putaddress(long id, address address)
+        // PUT: api/Addresses/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAddress(long id, Address address)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             if (id != address.AddressId)
             {
                 return BadRequest();
             }
 
-            db.Entry(address).State = EntityState.Modified;
+            _context.Entry(address).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!addressExists(id))
+                if (!AddressExists(id))
                 {
                     return NotFound();
                 }
@@ -79,73 +70,40 @@ namespace Final.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return NoContent();
         }
 
-        // POST: api/addresses
-        [ResponseType(typeof(address))]
-        public IHttpActionResult Postaddress(address address)
+        // POST: api/Addresses
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPost]
+        public async Task<ActionResult<Address>> PostAddress(Address address)
         {
-			if (!ModelState.IsValid)
-			{
-				return BadRequest(ModelState);
-			}
+            _context.Address.Add(address);
+            await _context.SaveChangesAsync();
 
-			bool addressExists = false;
-			List<address> addresses = db.addresses.ToList();
-			addresses.ForEach(x =>
-			{
-				if ((x.AddressLine1 == address.AddressLine1 || x.AddressLine1 == null && x.AddressLine1 == null) &&
-					(x.AddressLine2 == address.AddressLine2 || x.AddressLine2 == null && x.AddressLine2 == null) &&
-					(x.City == address.City || x.City == null && x.City == null) &&
-					(x.State == address.State || x.State == null && x.State == null) &&
-					(x.Zip == address.Zip || x.Zip == null && x.Zip == null))
-				{
-					addressExists = true;
-					address = x;
-				}
-			});
-			
-			if (addressExists)
-			{
-				return Ok(address);
-			} else
-			{
-				db.addresses.Add(address);
-				db.SaveChanges();
-
-				return CreatedAtRoute("DefaultApi", new { id = address.AddressId }, address);
-			}
+            return CreatedAtAction("GetAddress", new { id = address.AddressId }, address);
         }
 
-        // DELETE: api/addresses/5
-        [ResponseType(typeof(address))]
-        public IHttpActionResult Deleteaddress(long id)
+        // DELETE: api/Addresses/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Address>> DeleteAddress(long id)
         {
-            address address = db.addresses.Find(id);
+            var address = await _context.Address.FindAsync(id);
             if (address == null)
             {
                 return NotFound();
             }
 
-            db.addresses.Remove(address);
-            db.SaveChanges();
+            _context.Address.Remove(address);
+            await _context.SaveChangesAsync();
 
-            return Ok(address);
+            return address;
         }
 
-        protected override void Dispose(bool disposing)
+        private bool AddressExists(long id)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool addressExists(long id)
-        {
-            return db.addresses.Count(e => e.AddressId == id) > 0;
+            return _context.Address.Any(e => e.AddressId == id);
         }
     }
 }
