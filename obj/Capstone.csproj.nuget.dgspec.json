@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Program Files\\GitHub\\Capstone\\Capstone.csproj": {}
+    "F:\\Program Files\\GitHub\\Final-Project\\Capstone.csproj": {}
   },
   "projects": {
-    "F:\\Program Files\\GitHub\\Capstone\\Capstone.csproj": {
+    "F:\\Program Files\\GitHub\\Final-Project\\Capstone.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Program Files\\GitHub\\Capstone\\Capstone.csproj",
+        "projectUniqueName": "F:\\Program Files\\GitHub\\Final-Project\\Capstone.csproj",
         "projectName": "Capstone",
-        "projectPath": "F:\\Program Files\\GitHub\\Capstone\\Capstone.csproj",
+        "projectPath": "F:\\Program Files\\GitHub\\Final-Project\\Capstone.csproj",
         "packagesPath": "C:\\Users\\Xavier\\.nuget\\packages\\",
-        "outputPath": "F:\\Program Files\\GitHub\\Capstone\\obj\\",
+        "outputPath": "F:\\Program Files\\GitHub\\Final-Project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
