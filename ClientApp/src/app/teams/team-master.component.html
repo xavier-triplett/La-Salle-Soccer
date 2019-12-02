@@ -1,0 +1,37 @@
+<div class="jumbotron">
+  <h1 class="display-4 text-center">{{title}}</h1>
+  <div class="row">
+    <div class="col-md-8"></div>
+    <div class="col-md-4 float-right"><button class="btn btn-primary mb-2" (click)="goToDetail(0)">Add New Team</button><button class="btn btn-danger mb-2 ml-2" [disabled]="!deleteValid" (click)="deleteTeams()">Delete Selected Teams</button></div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col">Name</th>
+              <th scope="col">Coach</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Birth Year</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of teams">
+              <td *ngIf="!containsTeam(item)"><input type="checkbox" (click)="teamsToDelete.push(item)" /></td>
+              <td *ngIf="containsTeam(item)"><input type="checkbox" (click)="removeTeam(item)" checked /></td>
+              <td><button class="btn btn-primary" (click)="goToDetail(item.TeamId)">Edit</button></td>
+              <td>{{item.Name}}</td>
+              <td>{{item.CoachName}}</td>
+              <td>{{item.Gender}}</td>
+              <td>{{item.BirthYear}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+      

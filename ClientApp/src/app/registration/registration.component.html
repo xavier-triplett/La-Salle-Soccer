@@ -1,0 +1,118 @@
+<div class="jumbotron">
+  <h1 class="display-4 text-center">User Registration</h1>
+  <hr />
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>First Name</label>
+            <input name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName" class="form-control" required />
+            <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Last Name</label>
+            <input name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName" class="form-control" required />
+            <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Username</label>
+            <input name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName" class="form-control" required />
+            <!--<label *ngIf="Username.invalid && Username.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Password</label>
+            <input name="Password" #Password="ngModel" [(ngModel)]="user.Password" class="form-control" type="password" required />
+            <!--<label *ngIf="Password.invalid && Password.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Date Of Birth</label>
+            <input name="DateOfBirth" #DateOfBrith="ngModel" [(ngModel)]="user.DateOfBirth" class="form-control" type="date" required />
+            <!--<label *ngIf="DateOfBirth.invalid && DateOfBirth.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>Male</label>
+            <input name="Gender" #Gender="ngModel" type="radio" [(ngModel)]="user.Gender" [value]="'Male'" class="form-control" />
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>Female</label>
+            <input name="Gender" #Gender="ngModel" type="radio" [(ngModel)]="user.Gender" [value]="'Female'" class="form-control" />
+          </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+              <label>Other</label>
+              <input name="Gender" #Gender="ngModel" type="radio" [(ngModel)]="user.Gender" [value]="'Other'" class="form-control" />
+            </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Address Line 1</label>
+            <input name="AddressLine1" #AddressLine1="ngModel" [(ngModel)]="address.AddressLine1" class="form-control" required />
+            <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Address Line 2</label>
+            <input name="AddressLine2" #AddressLine2="ngModel" [(ngModel)]="address.AddressLine2" class="form-control"/>
+            <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>City</label>
+            <input name="City" #City="ngModel" [(ngModel)]="address.City" class="form-control" required />
+            <!--<label *ngIf="Username.invalid && Username.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>State</label>
+            <input name="State" #State="ngModel" [(ngModel)]="address.State" class="form-control" required />
+            <!--<label *ngIf="Password.invalid && Password.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>ZIP</label>
+            <input name="ZIP" #ZIP="ngModel" [(ngModel)]="address.Zip" class="form-control" required />
+            <!--<label *ngIf="Password.invalid && Password.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <button type="button" class="btn btn-lg btn-light btn-block" (click)="goToLogin()">Cancel</button>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <button type="button" class="btn btn-lg btn-primary btn-block" (click)="onSubmit()">Create Account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

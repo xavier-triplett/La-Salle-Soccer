@@ -1,0 +1,58 @@
+<div class="jumbotron">
+  <ng-container *ngIf="dataId > 0; else newGame">
+    <h1 class="display-4 text-center">{{data.FirstName}} {{data.LastName}}</h1>
+    <hr />
+  </ng-container>
+  <ng-template #newGame>
+    <h1 class="display-4 text-center">New User</h1>
+    <hr />
+  </ng-template>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Username</label>
+            <input name="UserName" #UserName="ngModel" [(ngModel)]="data.UserName" class="form-control" required />
+            <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Password</label>
+            <input name="Gender" #Password="ngModel" type="password" [(ngModel)]="data.Password" class="form-control" required />
+            <!--<label *ngIf="Username.invalid && Username.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Date Of Birth</label>
+            <input name="DateOfBirth" #DateOfBirth="ngModel" type="date" [(ngModel)]="data.FirstName" class="form-control" required />
+            <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Gender</label>
+            <input name="Gender" #Gender="ngModel" [(ngModel)]="data.Gender" class="form-control" required />
+            <!--<label *ngIf="Username.invalid && Username.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <button type="button" class="btn btn-lg btn-light btn-block" (click)="goToMaster()">Back</button>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <button type="button" class="btn btn-lg btn-primary btn-block" (click)="onSubmit()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
