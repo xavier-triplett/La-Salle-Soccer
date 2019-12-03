@@ -19,15 +19,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of games">
-              <td *ngIf="!containsGame(item)"><input type="checkbox" (click)="gamesToDelete.push(item)"/></td>
-              <td *ngIf="containsGame(item)"><input type="checkbox" (click)="removeGame(item)" checked/></td>
-              <td><button class="btn btn-primary" (click)="goToDetail(item.GameId)">Edit</button></td>
-              <td>{{item.HomeTeamName}}</td>
-              <td>{{item.AwayTeamName}}</td>
-              <td>{{item.HomeGoals}}</td>
-              <td>{{item.AwayGoals}}</td>
-            </tr>
+            <ng-container *ngFor="let game of games">
+              <tr>
+                <td *ngIf="!containsGame(game)"><input type="checkbox" (click)="gamesToDelete.push(game)" /></td>
+                <td *ngIf="containsGame(game)"><input type="checkbox" (click)="removeGame(game)" checked /></td>
+                <td><button class="btn btn-primary" (click)="goToDetail(game.GameId)">Edit</button></td>
+                <td>{{game.homeTeamName}}</td>
+                <td>{{game.awayTeamName}}</td>
+                <td>{{game.homeGoals}}</td>
+                <td>{{game.awayGoals}}</td>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
       </div>

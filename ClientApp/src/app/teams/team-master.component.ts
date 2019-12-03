@@ -29,7 +29,10 @@ export class TeamMasterComponent implements OnInit {
 		this._router.navigateByUrl('teams/item/' + id);
 	}
 
-  reload() {
+	reload() {
+	  this.teams = [];
+		this.teamsToDelete = [];
+
     this._data.getTeams().then(res => {
 			this.teams = res;
     },
@@ -47,13 +50,14 @@ export class TeamMasterComponent implements OnInit {
 	}
 
 	removeTeam(team: Team) {
-		this.teamsToDelete = this.teamsToDelete.filter(x => x.TeamId != team.TeamId);
+		this.teamsToDelete = this.teamsToDelete.filter(x => x.teamId != team.teamId);
 	}
 
 	deleteTeams() {
 		this.teamsToDelete.forEach(x => {
-			this._data.deleteTeam(x.TeamId).then(res => {
+			this._data.deleteTeam(x.teamId).then(res => {
 				this._toastr.success("Successfully deleted team.", "Success");
+				if (x.teamId == this.teamsToDelete[this.teamsToDelete.length - 1].teamId) this.reload();
 			},
 				err => {
 					this._toastr.error("Failed to delete team. Reason: " + err.statusText, "Failure");

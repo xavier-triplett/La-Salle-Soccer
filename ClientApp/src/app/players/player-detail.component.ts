@@ -49,9 +49,9 @@ export class PlayerDetailComponent implements OnInit, OnDestroy {
 		if (this.dataId != 0) {
 			this._data.getPlayer(this.dataId).then(res => {
 				this.data = res;
-				this.dataId = res.TeamId;
-				this.fullName = res.FirstName + " " + res.LastName;
-				this.birthYear = moment(res.DateOfBirth).year();
+				this.dataId = res.teamId;
+				this.fullName = res.firstName + " " + res.lastName;
+				this.birthYear = moment(res.dateOfBirth).year();
 			},
 				err => {
 					this._toastr.error("Failed to get player. Reason: " + err.statusText);
@@ -63,18 +63,16 @@ export class PlayerDetailComponent implements OnInit, OnDestroy {
 		if (this.dataId == 0) {
 			this._data.postPlayer(this.data).then(res => {
 				this.data = res;
-				this.dataId = res.TeamId;
+				this.dataId = res.teamId;
 				this._toastr.success("Successfully created player.", "Success");
 				this.reload();
-				this.goToDetail(res.PlayerId);
+				this.goToDetail(res.playerId);
 			},
 			err => {
 				this._toastr.error("Failed to create player. Reason: " + err.statusText);
 			});
 		} else {
 			this._data.putPlayer(this.data, this.dataId).then(res => {
-				this.data = res;
-				this.dataId = res.TeamId;
 				this._toastr.success("Successfully updated player.", "Success");
 				this.reload();
 			},

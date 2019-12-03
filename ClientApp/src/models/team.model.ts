@@ -1,11 +1,11 @@
 export class Team {
-	TeamId: number;
-	CoachId: number;
-	Name: string;
-	Gender: string;
-	BirthYear: number;
-	HomeLocation: string;
+	teamId: number;
+	coachId: number;
+	name: string;
+	gender: string;
+	birthYear: number;
+	homeLocation: string;
 
 	//Not Mapped
-	CoachName: string;
+	coachName: string;
 }

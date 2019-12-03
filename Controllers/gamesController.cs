@@ -20,15 +20,24 @@ namespace Capstone.Controllers
             _context = context;
         }
 
-        // GET: api/Games
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Game>>> GetGame()
-        {
-            return await _context.Game.ToListAsync();
-        }
+		// GET: api/Games
+		[HttpGet]
+		public ActionResult<IEnumerable<Game>> GetGame()
+		{
+			List<Game> items = _context.Game
+				.Include(x => x.AwayTeam)
+				.Include(x => x.AwayTeam)
+				.ToList();
+			items.ForEach(x =>
+			{
+				x.AwayTeamName = x.AwayTeam.Name;
+				x.HomeTeamName = x.HomeTeam.Name;
+			});
+			return items;
+		}
 
-        // GET: api/Games/5
-        [HttpGet("{id}")]
+		// GET: api/Games/5
+		[HttpGet("{id}")]
         public async Task<ActionResult<Game>> GetGame(long id)
         {
             var game = await _context.Game.FindAsync(id);

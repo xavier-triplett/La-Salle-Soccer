@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +12,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
-	public userName: string = "";
+	public username: string = "";
 	public password: string = "";
+	public users: User[] = [];
 
 	constructor(
 		private _data: UserService,
@@ -30,31 +32,31 @@ export class LoginComponent implements OnInit {
 
    //TODO: Move this password and username check to the back end
 	onSubmit() {
-		this._auth.setLoggedIn(true);
-		this._auth.setUserId(1);
-		this._router.navigateByUrl('');
-		/*
 		this._data.getUsers().then(res => {
-			var userNameMatched = false;
-			res.forEach(x => {
-				if (x.UserName == this.userName && x.Password == this.password) {
+			var success = false;
+			var usernameMatched = false;
+			this.users = res;
+			this.users.forEach(x => {
+				if (x.username == this.username && x.password == this.password) {
 					this._auth.setLoggedIn(true);
-					this._auth.setUserId(x.UserId);
+					this._auth.setUserId(x.userId);
 					this._router.navigateByUrl('');
-				} else if (x.UserName == this.userName) {
-					userNameMatched = true;
+					success = true;
+				} else if (x.username == this.username) {
+					usernameMatched = true;
 				}
 			});
-			if (userNameMatched) {
-				this._toastr.error("Invalid Password.", "Failed to Login");
-			} else {
-				this._toastr.error("Invalid Username or Password.", "Failed to Login");
+			if (!success) {
+				if (usernameMatched) {
+					this._toastr.error("Invalid Password.", "Failed to Login");
+				} else {
+					this._toastr.error("Invalid Username or Password.", "Failed to Login");
+				}
 			}
 		},
 		err => {
 			this._toastr.error("Unable to get users. Reason: " + err.statusText, "Failed to Login");
 		});
-		*/
 	}
 
 }

@@ -29,7 +29,10 @@ export class UserMasterComponent implements OnInit {
 		this._router.navigateByUrl('users/item/' + id);
 	}
 
-  reload() {
+	reload() {
+	  this.users = [];
+		this.usersToDelete = [];
+
     this._data.getUsers().then(res => {
 			this.users = res;
 	  },
@@ -47,13 +50,14 @@ export class UserMasterComponent implements OnInit {
 	}
 
 	removeUser(user: User) {
-		this.usersToDelete = this.usersToDelete.filter(x => x.UserId != user.UserId);
+		this.usersToDelete = this.usersToDelete.filter(x => x.userId != user.userId);
 	}
 
 	deleteUsers() {
 		this.usersToDelete.forEach(x => {
-			this._data.deleteUser(x.UserId).then(res => {
+			this._data.deleteUser(x.userId).then(res => {
 				this._toastr.success("Successfully deleted user.", "Success");
+				if (x.userId == this.usersToDelete[this.usersToDelete.length - 1].userId) this.reload();
 			},
 			err => {
 				this._toastr.error("Failed to delete user. Reason: " + err.statusText, "Failure");

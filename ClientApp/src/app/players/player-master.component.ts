@@ -30,6 +30,9 @@ export class PlayerMasterComponent implements OnInit {
 	}
 
 	reload() {
+		this.players = [];
+		this.playersToDelete = [];
+
 		this._data.getPlayers().then(res => {
 			this.players = res;
 		},
@@ -47,13 +50,14 @@ export class PlayerMasterComponent implements OnInit {
 	}
 
 	removeGame(player: Player) {
-		this.playersToDelete = this.playersToDelete.filter(x => x.PlayerId != player.PlayerId);
+		this.playersToDelete = this.playersToDelete.filter(x => x.playerId != player.playerId);
 	}
 
 	deleteGames() {
 		this.playersToDelete.forEach(x => {
-			this._data.deletePlayer(x.PlayerId).then(res => {
+			this._data.deletePlayer(x.playerId).then(res => {
 				this._toastr.success("Successfully deleted player.", "Success");
+				if (x.playerId == this.playersToDelete[this.playersToDelete.length - 1].playerId) this.reload();
 			},
 			err => {
 				this._toastr.error("Failed to delete player. Reason: " + err.statusText, "Failure");

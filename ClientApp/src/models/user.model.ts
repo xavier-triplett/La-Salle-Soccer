@@ -1,10 +1,10 @@
 export class User {
-	UserId: number;
-	AddressId: number;
-	UserName: string;
-	Password: string;
-	FirstName: string;
-	LastName: string;
-	DateOfBirth: Date;
-	Gender: string;
+	userId: number;
+	addressId: number;
+	username: string;
+	password: string;
+	firstName: string;
+	lastName: string;
+	dateOfBirth: Date;
+	gender: string;
 }

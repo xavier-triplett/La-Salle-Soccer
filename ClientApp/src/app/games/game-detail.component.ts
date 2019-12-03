@@ -46,39 +46,28 @@ export class GameDetailComponent implements OnInit {
 		if (this.dataId != 0) {
 			this._data.getGame(this.dataId).then(res => {
 				this.data = res;
-				this.dataId = res.GameId;
+				this.dataId = res.gameId;
 			},
 			err => {
 				this._toastr.error("Failed to get game. Reason: " + err.statusText);
 			});
 		}
-		//Delete
-		this.data.GameId = 10;
-		this.data.HomeTeamId = 1;
-		this.data.AwayTeamId = 2;
-		this.data.HomeGoals = 2;
-		this.data.AwayGoals = 3;
-		this.data.HomePenaltyGoals = 4;
-		this.data.AwayPenaltyGoals = 5;
-		this.data.HomeTeamName = "Home Team";
-		this.data.AwayTeamName = "Away Team";	}
+	}
 
 	onSubmit() {
 		if (this.dataId == 0) {
 			this._data.postGame(this.data).then(res => {
 				this.data = res;
-				this.dataId = res.GameId;
+				this.dataId = res.gameId;
 				this._toastr.success("Successfully created game.", "Success");
 				this.reload();
-				this.goToDetail(res.GameId);
+				this.goToDetail(res.gameId);
 			},
 			err => {
 				this._toastr.error("Failed to create game. Reason: " + err.statusText);
 			});
 		} else {
 			this._data.putGame(this.data, this.dataId).then(res => {
-				this.data = res;
-				this.dataId = res.GameId;
 				this._toastr.success("Successfully updated game.", "Success");
 				this.reload();
 			},

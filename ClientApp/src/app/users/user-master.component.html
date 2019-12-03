@@ -22,11 +22,11 @@
             <tr *ngFor="let item of users">
               <td *ngIf="!containsUser(item)"><input type="checkbox" (click)="usersToDelete.push(item)" /></td>
               <td *ngIf="containsUser(item)"><input type="checkbox" (click)="removeUser(item)" checked /></td>
-              <td><button class="btn btn-primary" (click)="goToDetail(item.UserId)">Edit</button></td>
-              <td>{{item.FirstName}}</td>
-              <td>{{item.LastName}}</td>
-              <td>{{item.DateOfBirth}}</td>
-              <td>{{item.Gender}}</td>
+              <td><button class="btn btn-primary" (click)="goToDetail(item.userId)">Edit</button></td>
+              <td>{{item.firstName}}</td>
+              <td>{{item.lastName}}</td>
+              <td>{{item.dateOfBirth}}</td>
+              <td>{{item.gender}}</td>
             </tr>
           </tbody>
         </table>

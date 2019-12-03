@@ -46,7 +46,7 @@ export class TeamDetailComponent implements OnInit, OnDestroy {
 		if (this.dataId != 0) {
 			this._data.getTeam(this.dataId).then(res => {
 				this.data = res;
-				this.dataId = res.TeamId;
+				this.dataId = res.teamId;
 			},
 			err => {
 				this._toastr.error("Failed to get team. Reason: " + err.statusText);
@@ -58,18 +58,16 @@ export class TeamDetailComponent implements OnInit, OnDestroy {
     if (this.dataId == 0) {
       this._data.postTeam(this.data).then(res => {
         this.data = res;
-        this.dataId = res.TeamId;
+        this.dataId = res.teamId;
 		    this._toastr.success("Successfully created team.", "Success");
 		    this.reload();
-		    this.goToDetail(res.TeamId);
+		    this.goToDetail(res.teamId);
       },
       err => {
         this._toastr.error("Failed to create team. Reason: " + err.statusText);
       });
     } else {
       this._data.putTeam(this.data, this.dataId).then(res => {
-        this.data = res;
-        this.dataId = res.TeamId;
 		    this._toastr.success("Successfully updated team.", "Success");
 		    this.reload();
       },

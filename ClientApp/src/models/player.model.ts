@@ -1,13 +1,13 @@
 export class Player {
-	PlayerId: number;
-	UserId: number;
-	TeamId: number;
-	DominateFoot: string;
+	playerId: number;
+	userId: number;
+	teamId: number;
+	dominateFoot: string;
 
 	//Not Mapped
-	FirstName: string;
-	LastName: string;
-	DateOfBirth: Date;
-	Gender: string;
-	TeamName: string;
+	firstName: string;
+	lastName: string;
+	dateOfBirth: Date;
+	gender: string;
+	teamName: string;
 }

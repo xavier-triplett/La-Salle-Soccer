@@ -1,10 +1,10 @@
 export class Coach {
-	CoachId: number;
-	UserID: number;
+	coachId: number;
+	userID: number;
 
 	//Not Mapped
-	FirstName: string;
-	LastName: string;
-	DateOfBirth: Date;
-	Gender: string;
+	firstName: string;
+	lastName: string;
+	dateOfBirth: Date;
+	gender: string;
 }

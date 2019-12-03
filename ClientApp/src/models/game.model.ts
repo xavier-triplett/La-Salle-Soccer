@@ -1,14 +1,14 @@
 export class Game {
-	GameId: number;
-	HomeTeamId: number;
-	AwayTeamId: number;
-	DateAndTime: Date;
-	HomeGoals: number;
-	AwayGoals: number;
-	HomePenaltyGoals: number;
-	AwayPenaltyGoals: number;
+	gameId: number;
+	homeTeamId: number;
+	awayTeamId: number;
+	dateAndTime: Date;
+	homeGoals: number;
+	awayGoals: number;
+	homePenaltyGoals: number;
+	awayPenaltyGoals: number;
 
   //Not Mapped
-	HomeTeamName: string;
-	AwayTeamName: string;
+	homeTeamName: string;
+	awayTeamName: string;
 }

@@ -46,7 +46,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 		if (this.dataId != 0) {
 			this._data.getUser(this.dataId).then(res => {
 				this.data = res;
-				this.dataId = res.UserId;
+				this.dataId = res.userId;
 			},
 			err => {
 				this._toastr.error("Failed to get user. Reason: " + err.statusText);
@@ -58,18 +58,16 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 		if (this.dataId == 0) {
 			this._data.postUser(this.data).then(res => {
 				this.data = res;
-				this.dataId = res.UserId;
+				this.dataId = res.userId;
 				this._toastr.success("Successfully created user.", "Success");
 				this.reload();
-				this.goToDetail(res.UserId);
+				this.goToDetail(res.userId);
 			},
 			err => {
 				this._toastr.error("Failed to create user. Reason: " + err.statusText);
 			});
 		} else {
 			this._data.putUser(this.data, this.dataId).then(res => {
-				this.data = res;
-				this.dataId = res.UserId;
 				this._toastr.success("Successfully updated user.", "Success");
 				this.reload();
 			},

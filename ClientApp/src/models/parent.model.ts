@@ -1,11 +1,11 @@
 export class Parent {
-	ParentId: number;
-	PlayerId: number;
-	UserId: number;
+	parentId: number;
+	playerId: number;
+	userId: number;
 
 	//Not Mapped
-	FirstName: string;
-	LastName: string;
-	DateOfBirth: Date;
-	Gender: string;
+	firstName: string;
+	lastName: string;
+	dateOfBirth: Date;
+	gender: string;
 }

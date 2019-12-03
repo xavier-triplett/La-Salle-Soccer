@@ -1,6 +1,6 @@
 <div class="jumbotron">
   <ng-container *ngIf="dataId > 0; else newGame">
-      <h1 class="display-4 text-center">{{data.HomeTeamName}} versus {{data.AwayTeamName}}</h1>
+      <h1 class="display-4 text-center">{{data.homeTeamName}} versus {{data.awayTeamName}}</h1>
       <hr />
   </ng-container>
   <ng-template #newGame>
@@ -14,14 +14,14 @@
         <div class="col-md-6">
           <div class="form-group">
             <label>Home Team</label>
-            <input name="HomeTeamId" #HomeTeamId="ngModel" [(ngModel)]="data.HomeTeamId" class="form-control" required />
+            <input name="HomeTeamId" #HomeTeamId="ngModel" [(ngModel)]="data.homeTeamId" class="form-control" required />
             <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label>Away Team</label>
-            <input name="AwayTeamId" #AwayTeamId="ngModel" [(ngModel)]="data.AwayTeamId" class="form-control" required />
+            <input name="AwayTeamId" #AwayTeamId="ngModel" [(ngModel)]="data.awayTeamId" class="form-control" required />
             <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
@@ -30,14 +30,14 @@
         <div class="col-md-6">
           <div class="form-group">
             <label>Home Score</label>
-            <input name="HomeGoals" #HomeGoals="ngModel" [(ngModel)]="data.HomeGoals" class="form-control" required />
+            <input name="HomeGoals" #HomeGoals="ngModel" [(ngModel)]="data.homeGoals" class="form-control" required />
             <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label>Away Score</label>
-            <input name="AwayGoals" #AwayGoals="ngModel" [(ngModel)]="data.AwayGoals" class="form-control" required />
+            <input name="AwayGoals" #AwayGoals="ngModel" [(ngModel)]="data.awayGoals" class="form-control" required />
             <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
@@ -46,14 +46,14 @@
         <div class="col-md-6">
           <div class="form-group">
             <label>Home Penalty Score</label>
-            <input name="HomePenaltyGoals" #HomePenaltyGoals="ngModel" [(ngModel)]="data.HomePenaltyGoals" class="form-control" required />
+            <input name="HomePenaltyGoals" #HomePenaltyGoals="ngModel" [(ngModel)]="data.homePenaltyGoals" class="form-control" required />
             <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label>Away Penalty Score</label>
-            <input name="AwayPenaltyGoals" #AwayPenaltyGoals="ngModel" [(ngModel)]="data.AwayPenaltyGoals" class="form-control" required />
+            <input name="AwayPenaltyGoals" #AwayPenaltyGoals="ngModel" [(ngModel)]="data.awayPenaltyGoals" class="form-control" required />
             <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
