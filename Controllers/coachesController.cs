@@ -22,23 +22,37 @@ namespace Capstone.Controllers
 
         // GET: api/Coaches
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Coach>>> GetCoach()
+        public ActionResult<IEnumerable<Coach>> GetCoach()
         {
-            return await _context.Coach.ToListAsync();
-        }
+			List<Coach> items = _context.Coach
+				.Include(x => x.User)
+				.ToList();
+			items.ForEach(x =>
+			{
+				x.FirstName = x.User.FirstName;
+				x.LastName = x.User.LastName;
+			});
+			return items;
+		}
 
         // GET: api/Coaches/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Coach>> GetCoach(long id)
+        public ActionResult<Coach> GetCoach(long id)
         {
-            var coach = await _context.Coach.FindAsync(id);
+			Coach item = _context.Coach
+				.Include(x => x.User)
+				.Where(x => x.CoachId == id)
+				.FirstOrDefault();
 
-            if (coach == null)
-            {
-                return NotFound();
-            }
+			if (item == null)
+			{
+				return NotFound();
+			}
 
-            return coach;
+			item.FirstName = item.User.FirstName;
+			item.LastName = item.User.LastName;
+
+			return item;
         }
 
         // PUT: api/Coaches/5

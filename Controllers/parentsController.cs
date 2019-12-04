@@ -22,23 +22,37 @@ namespace Capstone.Controllers
 
         // GET: api/Parents
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Parent>>> GetParent()
+        public ActionResult<IEnumerable<Parent>> GetParent()
         {
-            return await _context.Parent.ToListAsync();
+			List<Parent> items = _context.Parent
+				.Include(x => x.User)
+				.ToList();
+			items.ForEach(x =>
+			{
+				x.FirstName = x.User.FirstName;
+				x.LastName = x.User.LastName;
+			});
+			return items;
         }
 
         // GET: api/Parents/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Parent>> GetParent(long id)
+        public ActionResult<Parent> GetParent(long id)
         {
-            var parent = await _context.Parent.FindAsync(id);
+			Parent item = _context.Parent
+				.Include(x => x.User)
+				.Where(x => x.ParentId == id)
+				.FirstOrDefault();
 
-            if (parent == null)
-            {
-                return NotFound();
-            }
+			if (item == null)
+			{
+				return NotFound();
+			}
 
-            return parent;
+			item.FirstName = item.User.FirstName;
+			item.LastName = item.User.LastName;
+
+			return item;
         }
 
         // PUT: api/Parents/5

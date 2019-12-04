@@ -26,7 +26,7 @@ namespace Capstone.Controllers
 		{
 			List<Game> items = _context.Game
 				.Include(x => x.AwayTeam)
-				.Include(x => x.AwayTeam)
+				.Include(x => x.HomeTeam)
 				.ToList();
 			items.ForEach(x =>
 			{
@@ -38,16 +38,23 @@ namespace Capstone.Controllers
 
 		// GET: api/Games/5
 		[HttpGet("{id}")]
-        public async Task<ActionResult<Game>> GetGame(long id)
+        public ActionResult<Game> GetGame(long id)
         {
-            var game = await _context.Game.FindAsync(id);
+			Game item = _context.Game
+				.Include(x => x.AwayTeam)
+				.Include(x => x.HomeTeam)
+				.Where(x => x.GameId == id)
+				.FirstOrDefault();
 
-            if (game == null)
-            {
-                return NotFound();
-            }
+			if (item == null)
+			{
+				return NotFound();
+			}
 
-            return game;
+			item.AwayTeamName = item.AwayTeam.Name;
+			item.HomeTeamName = item.HomeTeam.Name;
+
+			return item;
         }
 
         // PUT: api/Games/5

@@ -26,26 +26,33 @@ namespace Capstone.Controllers
 		{
 			List<Team> items = _context.Team
 				.Include(x => x.Coach)
+					.ThenInclude(x => x.User)
 				.ToList();
 			items.ForEach(x =>
 			{
-				x.CoachName = x.Coach.FirstName + " " + x.Coach.LastName;
+				x.CoachName = x.Coach.User.FirstName + " " + x.Coach.User.LastName;
 			});
 			return items;
 		}
 
 		// GET: api/Teams/5
 		[HttpGet("{id}")]
-        public async Task<ActionResult<Team>> GetTeam(long id)
+        public ActionResult<Team> GetTeam(long id)
         {
-            var team = await _context.Team.FindAsync(id);
+			Team item = _context.Team
+				.Include(x => x.Coach)
+					.ThenInclude(x => x.User)
+				.Where(x => x.TeamId == id)
+				.FirstOrDefault();
 
-            if (team == null)
+            if (item == null)
             {
                 return NotFound();
             }
 
-            return team;
+			item.CoachName = item.Coach.User.FirstName + " " + item.Coach.User.LastName;
+
+            return item;
         }
 
         // PUT: api/Teams/5

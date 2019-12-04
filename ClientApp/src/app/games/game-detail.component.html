@@ -14,14 +14,14 @@
         <div class="col-md-6">
           <div class="form-group">
             <label>Home Team</label>
-            <input name="HomeTeamId" #HomeTeamId="ngModel" [(ngModel)]="data.homeTeamId" class="form-control" required />
+            <input name="HomeTeamName" #HomeTeamName="ngModel" [(ngModel)]="data.homeTeamName" class="form-control" disabled />
             <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label>Away Team</label>
-            <input name="AwayTeamId" #AwayTeamId="ngModel" [(ngModel)]="data.awayTeamId" class="form-control" required />
+            <input name="AwayTeamName" #AwayTeamName="ngModel" [(ngModel)]="data.awayTeamName" class="form-control" disabled />
             <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>

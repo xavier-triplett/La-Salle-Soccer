@@ -10,21 +10,30 @@
   <div class="row">
     <div class="col-md-12">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="form-group">
-            <label>Coach</label>
-            <input name="CoachName" #CoachName="ngModel" [(ngModel)]="data.coachName" class="form-control" required />
+            <label>Name</label>
+            <input name="Name" #Name="ngModel" [(ngModel)]="data.name" class="form-control" required />
             <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Coach</label>
+            <input name="CoachName" #CoachName="ngModel" [(ngModel)]="data.coachName" class="form-control" disabled />
+            <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
           <div class="form-group">
             <label>Gender</label>
             <input name="Gender" #Gender="ngModel" [(ngModel)]="data.gender" class="form-control" required />
             <!--<label *ngIf="Username.invalid && Username.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="form-group">
             <label>Birth Year</label>
             <input name="BirthYear" #BirthYear="ngModel" type="number" [(ngModel)]="data.birthYear" class="form-control" required />

@@ -57,8 +57,6 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 	onSubmit() {
 		if (this.dataId == 0) {
 			this._data.postUser(this.data).then(res => {
-				this.data = res;
-				this.dataId = res.userId;
 				this._toastr.success("Successfully created user.", "Success");
 				this.reload();
 				this.goToDetail(res.userId);

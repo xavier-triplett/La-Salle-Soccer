@@ -57,8 +57,6 @@ export class GameDetailComponent implements OnInit {
 	onSubmit() {
 		if (this.dataId == 0) {
 			this._data.postGame(this.data).then(res => {
-				this.data = res;
-				this.dataId = res.gameId;
 				this._toastr.success("Successfully created game.", "Success");
 				this.reload();
 				this.goToDetail(res.gameId);

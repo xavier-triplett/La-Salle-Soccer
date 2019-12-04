@@ -23,7 +23,7 @@
               <tr>
                 <td *ngIf="!containsGame(game)"><input type="checkbox" (click)="gamesToDelete.push(game)" /></td>
                 <td *ngIf="containsGame(game)"><input type="checkbox" (click)="removeGame(game)" checked /></td>
-                <td><button class="btn btn-primary" (click)="goToDetail(game.GameId)">Edit</button></td>
+                <td><button class="btn btn-primary" (click)="goToDetail(game.gameId)">Edit</button></td>
                 <td>{{game.homeTeamName}}</td>
                 <td>{{game.awayTeamName}}</td>
                 <td>{{game.homeGoals}}</td>
