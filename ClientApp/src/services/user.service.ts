@@ -44,4 +44,10 @@ export class UserService {
 			.toPromise();
 		return result as User;
 	}
+
+	async tryLogin(username: string, password: string) {
+		const result = await this.http.get(this.url + '/users/tryLogin/' + username + '/' + password)
+			.toPromise();
+		return result as User;
+	}
 }

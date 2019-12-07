@@ -4,7 +4,6 @@ import { Game } from '../../models/game.model';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
-import { SearchOptions } from '../../models/searchOptions.model';
 
 @Component({
   selector: 'app-game-master',
@@ -17,7 +16,6 @@ export class GameMasterComponent implements OnInit {
   public games: Game[] = [];
   public gamesToDelete: Game[] = [];
 
-	public searchOptions = new SearchOptions();
 
   constructor(
 	  private _data: GameService,

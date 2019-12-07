@@ -105,5 +105,22 @@ namespace Capstone.Controllers
         {
             return _context.User.Any(e => e.UserId == id);
         }
-    }
+
+		[HttpGet("[action]/{username}/{password}")]
+		public ActionResult<User> TryLogin(String username, String password)
+		{
+			User item = _context.User.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
+			if (item == null)
+			{
+				item = _context.User.Where(x => x.Username == username).FirstOrDefault();
+				if (item == null)
+				{
+					return item;
+				}
+				item.Password = null;
+				return item;
+			}
+			return item;
+		}
+	}
 }

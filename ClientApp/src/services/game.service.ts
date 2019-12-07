@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Game } from '../models/game.model';
 import { HttpClient } from "@angular/common/http";
-import { SearchOptions } from '../models/searchOptions.model';
 @Injectable({
   providedIn: 'root'
 })
