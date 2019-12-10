@@ -1,9 +1,9 @@
 <div class="jumbotron">
-  <ng-container *ngIf="dataId > 0; else newGame">
+  <ng-container *ngIf="dataId > 0; else newTeam">
     <h1 class="display-4 text-center">{{data.name}}</h1>
     <hr />
   </ng-container>
-  <ng-template #newGame>
+  <ng-template #newTeam>
     <h1 class="display-4 text-center">New Team</h1>
     <hr />
   </ng-template>
@@ -20,7 +20,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label>Coach</label>
-            <input name="CoachName" #CoachName="ngModel" [(ngModel)]="data.coachName" class="form-control" disabled />
+            <input name="CoachName" #CoachName="ngModel" [(ngModel)]="data.coachName" class="form-control" [disabled]="dataId != 0" />
             <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>

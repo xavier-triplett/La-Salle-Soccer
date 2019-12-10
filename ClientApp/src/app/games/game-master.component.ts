@@ -11,11 +11,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./game-master.component.scss']
 })
 export class GameMasterComponent implements OnInit {
-  @Input() title: string = "Games";
+	@Input() title: string = "Games";
+	@Input() useId: boolean = false;
   
   public games: Game[] = [];
   public gamesToDelete: Game[] = [];
-
 
   constructor(
 	  private _data: GameService,
@@ -27,14 +27,18 @@ export class GameMasterComponent implements OnInit {
     this.reload();
   }
 
-  goToDetail(id: number) {
-    this._router.navigateByUrl('games/item/' + id);
+	goToDetail(id: number) {
+		if (this.useId) this._router.navigateByUrl('games/item/' + id + '/' + 1);
+		else this._router.navigateByUrl('games/item/' + id + '/' + 0);
   }
 
-  reload() {
-    this.gamesToDelete = [];
-    this.games = [];
+	reload() {
+		this.gamesToDelete = [];
+		this.games = [];
 
+		if (this.useId) {
+            //set searchoption of user id
+		}
     this._data.getGames().then(res => {
 		  this.games = res;
 	  },

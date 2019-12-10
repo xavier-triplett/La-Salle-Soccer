@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-	public headers: HttpHeaders = new HttpHeaders();
 	public url = "https://localhost:44326/api";
 
 	constructor(
 		private http: HttpClient
-  ) {
-		this.headers = this.headers.append('Content-Type', 'application/json');
-	}
+  ) {}
 
 	async postUser(user: User) {
 		const result = await this.http.post(this.url + "/users", user)

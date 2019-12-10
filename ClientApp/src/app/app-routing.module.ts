@@ -12,7 +12,8 @@ import { GameDetailComponent } from './games/game-detail.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { UserMasterComponent } from './users/user-master.component';
 import { PlayerDetailComponent } from './players/player-detail.component';
-
+import { MyTeamComponent } from './my-team/my-team.component';
+import { MyGamesComponent } from './my-games/my-games.component';
 
 const routes: Routes = [
 	{
@@ -27,6 +28,11 @@ const routes: Routes = [
 	{
 		path: 'teams/item/:id',
 		component: TeamDetailComponent,
+		canActivate: [AuthGuard]
+	},
+	{
+		path: 'teams/myteam',
+		component: MyTeamComponent,
 		canActivate: [AuthGuard]
 	},
 	{
@@ -45,8 +51,13 @@ const routes: Routes = [
 		canActivate: [AuthGuard]
 	},
 	{
-		path: 'games/item/:id',
+		path: 'games/item/:id/:mygames',
 		component: GameDetailComponent,
+		canActivate: [AuthGuard]
+	},
+	{
+		path: 'games/mygames',
+		component: MyGamesComponent,
 		canActivate: [AuthGuard]
 	},
 	{

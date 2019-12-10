@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Team } from 'src/models/team.model';
 import { TeamService } from 'src/services/team.service';
 import { ToastrService } from 'ngx-toastr';
@@ -11,8 +11,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./team-detail.component.scss']
 })
 export class TeamDetailComponent implements OnInit, OnDestroy {
+	@Input() userId: number = 0;
 
-  public dataId: number = 0;
+	public dataId: number = 0;
   public data: Team = new Team;
 	private routeSub: Subscription;
 
@@ -23,15 +24,26 @@ export class TeamDetailComponent implements OnInit, OnDestroy {
 	  private _route: ActivatedRoute
   ) { }
 
-  ngOnInit() {
-	  this.routeSub = this._route.params.subscribe(params => {
-		  this.dataId = +params['id'];
-		  this.reload();
-	  });
+	ngOnInit() {
+		if (this.userId == 0) {
+			this.routeSub = this._route.params.subscribe(params => {
+				this.dataId = +params['id'];
+				this.reload();
+			});
+		} else {
+      //pass this.userId as a search option
+			this._data.getTeams().then(res => {
+				this.dataId = res[0].teamId;
+				this.reload();
+			},
+			err => {
+				this._toastr.error("Failed to get users team. Reason: " + err.statusText);
+			});
+		}
   }
 
 	ngOnDestroy() {
-		this.routeSub.unsubscribe();
+		if (this.routeSub) this.routeSub.unsubscribe();
 	}
 
   goToMaster() {

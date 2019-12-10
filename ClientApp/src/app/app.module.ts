@@ -24,6 +24,8 @@ import { GameService } from 'src/services/game.service';
 import { ParentService } from 'src/services/parent.service';
 import { PlayerService } from 'src/services/player.service';
 import { TeamService } from 'src/services/team.service';
+import { MyGamesComponent } from './my-games/my-games.component';
+import { MyTeamComponent } from './my-team/my-team.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { TeamService } from 'src/services/team.service';
     TeamMasterComponent,
     TeamDetailComponent,
     HomeComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    MyGamesComponent,
+    MyTeamComponent
   ],
   imports: [
     BrowserModule,

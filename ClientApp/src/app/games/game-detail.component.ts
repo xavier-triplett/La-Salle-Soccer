@@ -11,9 +11,9 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./game-detail.component.scss']
 })
 export class GameDetailComponent implements OnInit {
-
 	public dataId: number = 0;
 	public data: Game = new Game;
+	public myGames: number = 0;
 	private routeSub: Subscription;
 
 	constructor(
@@ -26,6 +26,7 @@ export class GameDetailComponent implements OnInit {
 	ngOnInit() {
 		this.routeSub = this._route.params.subscribe(params => {
 			this.dataId = +params['id'];
+			this.myGames = +params['mygames'];
 			this.reload();
 		});
 	}
@@ -35,7 +36,8 @@ export class GameDetailComponent implements OnInit {
 	}
 
 	goToMaster() {
-		this._router.navigateByUrl('games');
+		if (this.myGames == 1) this._router.navigateByUrl('games/mygames');
+		else this._router.navigateByUrl('games');
 	}
 
 	goToDetail(id: number) {
