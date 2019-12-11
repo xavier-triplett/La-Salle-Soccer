@@ -13,9 +13,9 @@ namespace Capstone.Controllers
     [ApiController]
     public class TeamsController : ControllerBase
     {
-        private readonly TeamContext _context;
+        private readonly DBContext _context;
 
-        public TeamsController(TeamContext context)
+        public TeamsController(DBContext context)
         {
             _context = context;
         }

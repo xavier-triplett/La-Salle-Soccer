@@ -34,14 +34,7 @@ namespace Capstone
 				configuration.RootPath = "ClientApp/dist";
 			});
 
-			services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
-			services.AddDbContext<TeamContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
-			services.AddDbContext<PlayerContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
-			services.AddDbContext<ParentContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
-			services.AddDbContext<GameContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
-			services.AddDbContext<CoachContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
-			services.AddDbContext<AddressContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
-
+			services.AddDbContext<DBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

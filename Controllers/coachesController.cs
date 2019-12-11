@@ -13,9 +13,9 @@ namespace Capstone.Controllers
     [ApiController]
     public class CoachesController : ControllerBase
     {
-        private readonly CoachContext _context;
+        private readonly DBContext _context;
 
-        public CoachesController(CoachContext context)
+        public CoachesController(DBContext context)
         {
             _context = context;
         }

@@ -13,9 +13,9 @@ namespace Capstone.Controllers
     [ApiController]
     public class AddressesController : ControllerBase
     {
-        private readonly AddressContext _context;
+        private readonly DBContext _context;
 
-        public AddressesController(AddressContext context)
+        public AddressesController(DBContext context)
         {
             _context = context;
         }

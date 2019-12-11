@@ -13,9 +13,9 @@ namespace Capstone.Controllers
     [ApiController]
     public class ParentsController : ControllerBase
     {
-        private readonly ParentContext _context;
+        private readonly DBContext _context;
 
-        public ParentsController(ParentContext context)
+        public ParentsController(DBContext context)
         {
             _context = context;
         }
