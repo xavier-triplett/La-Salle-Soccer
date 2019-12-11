@@ -19,9 +19,13 @@
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <label>Coach</label>
-            <input name="CoachName" #CoachName="ngModel" [(ngModel)]="data.coachName" class="form-control" [disabled]="dataId != 0" />
-            <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
+            <label for="Coach">Coach</label>
+            <select name="Coach" id="Coach" [(ngModel)]="data.coachId" class="form-control">
+              <ng-container *ngFor="let coach of coaches">
+                <option [value]="coach.coachId">{{coach.fullName}}</option>
+              </ng-container>
+            </select>
+            <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
       </div>

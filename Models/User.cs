@@ -7,8 +7,9 @@ namespace Capstone.Models
 {
 	using System;
 	using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
 
-	public partial class User
+    public partial class User
 	{
 		public virtual Address Address { get; set; }
 
@@ -21,5 +22,8 @@ namespace Capstone.Models
 		public string LastName { get; set; }
 		public Nullable<System.DateTime> DateOfBirth { get; set; }
 		public string Gender { get; set; }
+
+		[NotMapped]
+		public string FullName { get; set; }
 	}
 }

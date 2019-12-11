@@ -4,6 +4,8 @@ import { TeamService } from 'src/services/team.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CoachService } from '../../services/coach.service';
+import { Coach } from '../../models/coach.model';
 
 @Component({
   selector: 'app-team-detail',
@@ -14,11 +16,13 @@ export class TeamDetailComponent implements OnInit, OnDestroy {
 	@Input() userId: number = 0;
 
 	public dataId: number = 0;
-  public data: Team = new Team;
+	public data: Team = new Team;
+	public coaches: Coach[] = [];
 	private routeSub: Subscription;
 
   constructor (
-    private _data: TeamService,
+	  private _data: TeamService,
+	  private _coachService: CoachService,
     private _toastr: ToastrService,
 	  private _router: Router,
 	  private _route: ActivatedRoute
@@ -31,7 +35,7 @@ export class TeamDetailComponent implements OnInit, OnDestroy {
 				this.reload();
 			});
 		} else {
-      //pass this.userId as a search option
+      //TODO: pass this.userId as a search option
 			this._data.getTeams().then(res => {
 				this.dataId = res[0].teamId;
 				this.reload();
@@ -40,6 +44,13 @@ export class TeamDetailComponent implements OnInit, OnDestroy {
 				this._toastr.error("Failed to get users team. Reason: " + err.statusText);
 			});
 		}
+
+		this._coachService.getCoachs().then(res => {
+			this.coaches = res;
+		},
+		err => {
+			this._toastr.error("Failed to get coaches. Reason: " + err.statusText);
+		});
   }
 
 	ngOnDestroy() {

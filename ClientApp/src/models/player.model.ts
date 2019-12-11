@@ -7,6 +7,7 @@ export class Player {
 	//Not Mapped
 	firstName: string;
 	lastName: string;
+	fullName: string;
 	dateOfBirth: Date;
 	gender: string;
 	teamName: string;

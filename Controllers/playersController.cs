@@ -33,6 +33,9 @@ namespace Capstone.Controllers
 				x.TeamName = x.Team.Name;
 				x.FirstName = x.User.FirstName;
 				x.LastName = x.User.LastName;
+				x.FullName = x.User.FirstName + " " + x.User.LastName;
+				x.DateOfBirth = x.User.DateOfBirth.Value;
+				x.Gender = x.User.Gender;
 			});
 			return items;
 		}
@@ -53,6 +56,9 @@ namespace Capstone.Controllers
 
 			item.FirstName = item.User.FirstName;
 			item.LastName = item.User.LastName;
+			item.DateOfBirth = item.User.DateOfBirth.Value;
+			item.Gender = item.User.Gender;
+			item.FullName = item.User.FirstName + " " + item.User.LastName;
 
 			return item;
         }

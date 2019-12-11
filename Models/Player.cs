@@ -27,6 +27,9 @@ namespace Capstone.Models
 		public string LastName { get; set; }
 
 		[NotMapped]
+		public string FullName { get; set; }
+
+		[NotMapped]
 		public DateTime DateOfBirth { get; set; }
 
 		[NotMapped]

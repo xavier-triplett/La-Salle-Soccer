@@ -45,15 +45,15 @@ export class PlayerMasterComponent implements OnInit {
 		return this.playersToDelete.length > 0;
 	}
 
-	containsGame(player: Player): boolean {
+	containsPlayer(player: Player): boolean {
 		return this.playersToDelete.includes(player);
 	}
 
-	removeGame(player: Player) {
+	removePlayer(player: Player) {
 		this.playersToDelete = this.playersToDelete.filter(x => x.playerId != player.playerId);
 	}
 
-	deleteGames() {
+	deletePlayers() {
 		this.playersToDelete.forEach(x => {
 			this._data.deletePlayer(x.playerId).then(res => {
 				this._toastr.success("Successfully deleted player.", "Success");
