@@ -81,7 +81,7 @@ export class CoachDetailComponent implements OnInit {
 				this.reload();
 			},
 				err => {
-					this._toastr.error("Failed to create coach. Reason: " + err.statusText);
+					this._toastr.error("Failed to update coach. Reason: " + err.statusText);
 				});
 		}
 	}

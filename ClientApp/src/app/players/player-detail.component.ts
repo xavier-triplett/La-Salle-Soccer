@@ -93,7 +93,7 @@ export class PlayerDetailComponent implements OnInit, OnDestroy {
 				this.reload();
 			},
 			err => {
-				this._toastr.error("Failed to create player. Reason: " + err.statusText);
+				this._toastr.error("Failed to update player. Reason: " + err.statusText);
 			});
 		}
 	}

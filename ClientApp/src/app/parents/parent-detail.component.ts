@@ -93,7 +93,7 @@ export class ParentDetailComponent implements OnInit {
 				this.reload();
 			},
 				err => {
-					this._toastr.error("Failed to create parent. Reason: " + err.statusText);
+					this._toastr.error("Failed to update parent. Reason: " + err.statusText);
 				});
 		}
 	}

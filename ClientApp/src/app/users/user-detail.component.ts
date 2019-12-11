@@ -70,7 +70,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 				this.reload();
 			},
 			err => {
-				this._toastr.error("Failed to create user. Reason: " + err.statusText);
+				this._toastr.error("Failed to update user. Reason: " + err.statusText);
 			});
 		}
 	}

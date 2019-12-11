@@ -93,7 +93,7 @@ export class TeamDetailComponent implements OnInit, OnDestroy {
 		    this.reload();
       },
       err => {
-        this._toastr.error("Failed to create team. Reason: " + err.statusText);
+        this._toastr.error("Failed to update team. Reason: " + err.statusText);
       });
     }
   }

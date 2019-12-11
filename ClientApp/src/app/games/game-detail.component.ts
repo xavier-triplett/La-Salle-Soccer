@@ -82,7 +82,7 @@ export class GameDetailComponent implements OnInit {
 				this.reload();
 			},
 			err => {
-				this._toastr.error("Failed to create game. Reason: " + err.statusText);
+				this._toastr.error("Failed to update game. Reason: " + err.statusText);
 			});
 		}
 	}
