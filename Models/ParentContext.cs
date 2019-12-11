@@ -10,5 +10,7 @@ namespace Capstone.Models
 		}
 
 		public DbSet<Parent> Parent { get; set; }
+		public DbSet<Player> Player { get; set; }
+
 	}
 }

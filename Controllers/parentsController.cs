@@ -26,6 +26,7 @@ namespace Capstone.Controllers
         {
 			List<Parent> items = _context.Parent
 				.Include(x => x.User)
+				.Include(x => x.Player)
 				.ToList();
 			items.ForEach(x =>
 			{
@@ -34,6 +35,13 @@ namespace Capstone.Controllers
 				x.FullName = x.User.FirstName + " " + x.User.LastName;
 				x.DateOfBirth = x.User.DateOfBirth.Value;
 				x.Gender = x.User.Gender;
+
+				Player player = _context.Player
+					.Include(y => y.User)
+					.Where(y => y.PlayerId == x.PlayerId)
+					.FirstOrDefault();
+
+				x.PlayerName = player.User.FirstName + " " + player.User.LastName;
 			});
 			return items;
         }
@@ -58,6 +66,12 @@ namespace Capstone.Controllers
 			item.Gender = item.User.Gender;
 			item.FullName = item.User.FirstName + " " + item.User.LastName;
 
+			Player player = _context.Player
+				.Include(y => y.User)
+				.Where(y => y.PlayerId == item.PlayerId)
+				.FirstOrDefault();
+
+			item.PlayerName = player.User.FirstName + " " + player.User.LastName;
 
 			return item;
         }

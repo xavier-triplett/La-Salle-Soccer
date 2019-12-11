@@ -15,7 +15,6 @@ export class PlayerDetailComponent implements OnInit, OnDestroy {
 
 	public dataId: number = 0;
 	public data: Player = new Player;
-	public fullName: string = "";
 	public birthYear: number;
 	private routeSub: Subscription;
 
@@ -50,12 +49,11 @@ export class PlayerDetailComponent implements OnInit, OnDestroy {
 			this._data.getPlayer(this.dataId).then(res => {
 				this.data = res;
 				this.dataId = res.teamId;
-				this.fullName = res.firstName + " " + res.lastName;
 				this.birthYear = moment(res.dateOfBirth).year();
 			},
-				err => {
-					this._toastr.error("Failed to get player. Reason: " + err.statusText);
-				});
+			err => {
+				this._toastr.error("Failed to get player. Reason: " + err.statusText);
+			});
 		}
 	}
 

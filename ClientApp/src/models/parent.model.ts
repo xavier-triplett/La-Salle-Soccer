@@ -9,4 +9,5 @@ export class Parent {
 	fullName: string;
 	dateOfBirth: Date;
 	gender: string;
+	playerName: string;
 }

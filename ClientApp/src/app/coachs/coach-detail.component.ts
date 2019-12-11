@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Coach } from '../../models/coach.model';
+import { Subscription } from 'rxjs';
+import { CoachService } from '../../services/coach.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router, ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-coach-detail',
@@ -6,10 +12,69 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./coach-detail.component.scss']
 })
 export class CoachDetailComponent implements OnInit {
+	public dataId: number = 0;
+	public data: Coach = new Coach;
+	public birthYear: number;
+	private routeSub: Subscription;
 
-  constructor() { }
+	constructor(
+		private _data: CoachService,
+		private _toastr: ToastrService,
+		private _router: Router,
+		private _route: ActivatedRoute
+	) { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+		this.routeSub = this._route.params.subscribe(params => {
+			this.dataId = +params['id'];
+			this.reload();
+		});
+	}
+
+	ngOnDestroy() {
+		this.routeSub.unsubscribe();
+	}
+
+	goToMaster() {
+		this._router.navigateByUrl('coaches');
+	}
+
+	goToDetail(id: number) {
+		this._router.navigateByUrl('coaches/item/' + id);
+	}
+
+	reload() {
+		if (this.dataId != 0) {
+			this._data.getCoach(this.dataId).then(res => {
+				this.data = res;
+				this.dataId = res.coachId;
+				this.birthYear = moment(res.dateOfBirth).year();
+			},
+				err => {
+					this._toastr.error("Failed to get coach. Reason: " + err.statusText);
+				});
+		}
+	}
+
+	onSubmit() {
+		if (this.dataId == 0) {
+			this._data.postCoach(this.data).then(res => {
+				this._toastr.success("Successfully created coach.", "Success");
+				this.reload();
+				this.goToDetail(res.coachId);
+			},
+				err => {
+					this._toastr.error("Failed to create coach. Reason: " + err.statusText);
+				});
+		} else {
+			this._data.putCoach(this.data, this.dataId).then(res => {
+				this._toastr.success("Successfully updated coach.", "Success");
+				this.reload();
+			},
+				err => {
+					this._toastr.error("Failed to create coach. Reason: " + err.statusText);
+				});
+		}
+	}
 
 }

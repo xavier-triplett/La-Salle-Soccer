@@ -10,5 +10,7 @@ namespace Capstone.Models
 		}
 
 		public DbSet<Coach> Coach { get; set; }
+		public DbSet<Team> Team { get; set; }
+
 	}
 }

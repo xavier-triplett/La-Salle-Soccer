@@ -1,1 +1,42 @@
-<p>coach-detail works!</p>
+<div class="jumbotron">
+  <ng-container *ngIf="dataId > 0; else newCoach">
+    <h1 class="display-4 text-center">{{data.fullName}}</h1>
+    <hr />
+  </ng-container>
+  <ng-template #newCoach>
+    <h1 class="display-4 text-center">New Coach</h1>
+    <hr />
+  </ng-template>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Birth Year</label>
+            <input name="BirthYear" #BirthYear="ngModel" [(ngModel)]="birthYear" class="form-control" required />
+            <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Gender</label>
+            <input name="Gender" #Gender="ngModel" [(ngModel)]="data.gender" class="form-control" required />
+            <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <button type="button" class="btn btn-lg btn-light btn-block" (click)="goToMaster()">Back</button>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <button type="button" class="btn btn-lg btn-primary btn-block" (click)="onSubmit()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

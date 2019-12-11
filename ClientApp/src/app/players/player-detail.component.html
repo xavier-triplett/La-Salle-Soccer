@@ -1,6 +1,6 @@
 <div class="jumbotron">
   <ng-container *ngIf="dataId > 0; else newGame">
-    <h1 class="display-4 text-center">{{fullName}}</h1>
+    <h1 class="display-4 text-center">{{data.fullName}}</h1>
     <hr />
   </ng-container>
   <ng-template #newGame>

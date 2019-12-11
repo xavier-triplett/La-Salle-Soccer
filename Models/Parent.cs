@@ -33,5 +33,8 @@ namespace Capstone.Models
 
 		[NotMapped]
 		public string Gender { get; set; }
+
+		[NotMapped]
+		public string PlayerName { get; set; }
 	}
 }

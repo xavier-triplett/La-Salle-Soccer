@@ -8,4 +8,5 @@ export class Coach {
 	fullName: string;
 	dateOfBirth: Date;
 	gender: string;
+	teamsCoached: string;
 }

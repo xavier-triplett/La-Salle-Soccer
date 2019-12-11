@@ -34,6 +34,24 @@ namespace Capstone.Controllers
 				x.FullName = x.User.FirstName + " " + x.User.LastName;
 				x.DateOfBirth = x.User.DateOfBirth.Value;
 				x.Gender = x.User.Gender;
+				
+				List<Team> teams = _context.Team
+				.Include(y => y.Coach)
+				.Where(y => y.CoachId == x.CoachId)
+				.ToList();
+
+				var first = true;
+				teams.ForEach(y =>
+				{
+					first = false;
+					if (first)
+					{
+						x.TeamsCoached = y.Name;
+					} else
+					{
+						x.TeamsCoached += ", " + y.Name;
+					}
+				});
 			});
 			return items;
 		}
@@ -58,6 +76,24 @@ namespace Capstone.Controllers
 			item.Gender = item.User.Gender;
 			item.FullName = item.User.FirstName + " " + item.User.LastName;
 
+			List<Team> teams = _context.Team
+				.Include(y => y.Coach)
+				.Where(y => y.CoachId == item.CoachId)
+				.ToList();
+
+			var first = true;
+			teams.ForEach(y =>
+			{
+				first = false;
+				if (first)
+				{
+					item.TeamsCoached = y.Name;
+				}
+				else
+				{
+					item.TeamsCoached += ", " + y.Name;
+				}
+			});
 			return item;
         }
 
