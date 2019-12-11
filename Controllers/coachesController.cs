@@ -43,11 +43,12 @@ namespace Capstone.Controllers
 				var first = true;
 				teams.ForEach(y =>
 				{
-					first = false;
 					if (first)
 					{
 						x.TeamsCoached = y.Name;
-					} else
+						first = false;
+					}
+					else
 					{
 						x.TeamsCoached += ", " + y.Name;
 					}
@@ -84,10 +85,10 @@ namespace Capstone.Controllers
 			var first = true;
 			teams.ForEach(y =>
 			{
-				first = false;
 				if (first)
 				{
 					item.TeamsCoached = y.Name;
+					first = false;
 				}
 				else
 				{

@@ -5,6 +5,10 @@ import { ParentService } from '../../services/parent.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
+import { PlayerService } from '../../services/player.service';
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/user.model';
+import { Player } from '../../models/player.model';
 
 @Component({
   selector: 'app-parent-detail',
@@ -15,11 +19,14 @@ export class ParentDetailComponent implements OnInit {
 
 	public dataId: number = 0;
 	public data: Parent = new Parent;
-	public birthYear: number;
+	public users: User[] = [];
+	public players: Player[] = [];
 	private routeSub: Subscription;
 
 	constructor(
 		private _data: ParentService,
+		private _playerService: PlayerService,
+		private _userService: UserService,
 		private _toastr: ToastrService,
 		private _router: Router,
 		private _route: ActivatedRoute
@@ -30,6 +37,20 @@ export class ParentDetailComponent implements OnInit {
 			this.dataId = +params['id'];
 			this.reload();
 		});
+
+		this._playerService.getPlayers().then(res => {
+			this.players = res;
+		},
+			err => {
+				this._toastr.error("Failed to get teams. Reason: " + err.statusText);
+			});
+
+		this._userService.getUsers().then(res => {
+			this.users = res;
+		},
+			err => {
+				this._toastr.error("Failed to get users. Reason: " + err.statusText);
+			});
 	}
 
 	ngOnDestroy() {
@@ -37,11 +58,11 @@ export class ParentDetailComponent implements OnInit {
 	}
 
 	goToMaster() {
-		this._router.navigateByUrl('parent');
+		this._router.navigateByUrl('parents');
 	}
 
 	goToDetail(id: number) {
-		this._router.navigateByUrl('parent/item/' + id);
+		this._router.navigateByUrl('parents/item/' + id);
 	}
 
 	reload() {
@@ -49,11 +70,10 @@ export class ParentDetailComponent implements OnInit {
 			this._data.getParent(this.dataId).then(res => {
 				this.data = res;
 				this.dataId = res.parentId;
-				this.birthYear = moment(res.dateOfBirth).year();
 			},
-				err => {
-					this._toastr.error("Failed to get parent. Reason: " + err.statusText);
-				});
+			err => {
+				this._toastr.error("Failed to get parent. Reason: " + err.statusText);
+			});
 		}
 	}
 

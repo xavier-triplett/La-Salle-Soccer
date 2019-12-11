@@ -21,7 +21,7 @@ export class GameDetailComponent implements OnInit {
 
 	constructor(
 		private _data: GameService,
-    private _teamsService: TeamService,
+    private _teamService: TeamService,
 		private _toastr: ToastrService,
 		private _router: Router,
 		private _route: ActivatedRoute
@@ -33,7 +33,7 @@ export class GameDetailComponent implements OnInit {
 			this.myGames = +params['mygames'];
 			this.reload();
 		});
-    this._teamsService.getTeams().then(res => {
+    this._teamService.getTeams().then(res => {
 			this.teams = res;
     },
     err => {

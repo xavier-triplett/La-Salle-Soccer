@@ -10,18 +10,15 @@
   <div class="row">
     <div class="col-md-12">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="form-group">
-            <label>Birth Year</label>
-            <input name="BirthYear" #BirthYear="ngModel" [(ngModel)]="birthYear" class="form-control" required />
+            <label for="User">User</label>
+            <select name="User" id="User" [(ngModel)]="data.userId" class="form-control">
+              <ng-container *ngFor="let user of users">
+                <option [value]="user.userId">{{user.fullName}}</option>
+              </ng-container>
+            </select>
             <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label>Gender</label>
-            <input name="Gender" #Gender="ngModel" [(ngModel)]="data.gender" class="form-control" required />
-            <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
       </div>

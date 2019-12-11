@@ -5,6 +5,8 @@ import { CoachService } from '../../services/coach.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
+import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-coach-detail',
@@ -14,11 +16,12 @@ import * as moment from 'moment';
 export class CoachDetailComponent implements OnInit {
 	public dataId: number = 0;
 	public data: Coach = new Coach;
-	public birthYear: number;
+	public users: User[] = [];
 	private routeSub: Subscription;
 
 	constructor(
 		private _data: CoachService,
+		private _userService: UserService,
 		private _toastr: ToastrService,
 		private _router: Router,
 		private _route: ActivatedRoute
@@ -28,6 +31,13 @@ export class CoachDetailComponent implements OnInit {
 		this.routeSub = this._route.params.subscribe(params => {
 			this.dataId = +params['id'];
 			this.reload();
+		});
+
+		this._userService.getUsers().then(res => {
+			this.users = res;
+		},
+		err => {
+			this._toastr.error("Failed to get users. Reason: " + err.statusText);
 		});
 	}
 
@@ -48,11 +58,10 @@ export class CoachDetailComponent implements OnInit {
 			this._data.getCoach(this.dataId).then(res => {
 				this.data = res;
 				this.dataId = res.coachId;
-				this.birthYear = moment(res.dateOfBirth).year();
 			},
-				err => {
-					this._toastr.error("Failed to get coach. Reason: " + err.statusText);
-				});
+			err => {
+				this._toastr.error("Failed to get coach. Reason: " + err.statusText);
+			});
 		}
 	}
 
