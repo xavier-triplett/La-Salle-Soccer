@@ -26,6 +26,10 @@ import { PlayerService } from 'src/services/player.service';
 import { TeamService } from 'src/services/team.service';
 import { MyGamesComponent } from './my-games/my-games.component';
 import { MyTeamComponent } from './my-team/my-team.component';
+import { CoachMasterComponent } from './coachs/coach-master.component';
+import { CoachDetailComponent } from './coachs/coach-detail.component';
+import { ParentMasterComponent } from './parents/parent-master.component';
+import { ParentDetailComponent } from './parents/parent-detail.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,11 @@ import { MyTeamComponent } from './my-team/my-team.component';
     HomeComponent,
     RegistrationComponent,
     MyGamesComponent,
-    MyTeamComponent
+    MyTeamComponent,
+		CoachMasterComponent,
+		CoachDetailComponent,
+		ParentMasterComponent,
+		ParentDetailComponent
   ],
   imports: [
     BrowserModule,

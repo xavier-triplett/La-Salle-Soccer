@@ -14,6 +14,10 @@ import { UserMasterComponent } from './users/user-master.component';
 import { PlayerDetailComponent } from './players/player-detail.component';
 import { MyTeamComponent } from './my-team/my-team.component';
 import { MyGamesComponent } from './my-games/my-games.component';
+import { CoachMasterComponent } from './coachs/coach-master.component';
+import { CoachDetailComponent } from './coachs/coach-detail.component';
+import { ParentMasterComponent } from './parents/parent-master.component';
+import { ParentDetailComponent } from './parents/parent-detail.component';
 
 const routes: Routes = [
 	{
@@ -58,6 +62,26 @@ const routes: Routes = [
 	{
 		path: 'games/mygames',
 		component: MyGamesComponent,
+		canActivate: [AuthGuard]
+	},
+	{
+		path: 'coaches',
+		component: CoachMasterComponent,
+		canActivate: [AuthGuard]
+	},
+	{
+		path: 'coaches/item/:id',
+		component: CoachDetailComponent,
+		canActivate: [AuthGuard]
+	},
+	{
+		path: 'parents',
+		component: ParentMasterComponent,
+		canActivate: [AuthGuard]
+	},
+	{
+		path: 'parents/item/:id',
+		component: ParentDetailComponent,
 		canActivate: [AuthGuard]
 	},
 	{
