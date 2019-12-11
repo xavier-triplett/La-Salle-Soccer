@@ -9,20 +9,27 @@
   </ng-template>
   <div class="row">
     <div class="col-md-12">
-      <!--TODO: Change this both to dropdowns-->
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <label>Home Team</label>
-            <input name="HomeTeamName" #HomeTeamName="ngModel" [(ngModel)]="data.homeTeamName" class="form-control" [disabled]="dataId != 0" />
+            <label for="HomeTeam">Home Team</label>
+            <select name="HomeTeam" id="HomeTeam" [(ngModel)]="data.homeTeamId" class="form-control">
+              <ng-container *ngFor="let team of teams">
+                <option [value]="team.teamId">{{team.name}}</option>
+              </ng-container>
+            </select>
             <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <label>Away Team</label>
-            <input name="AwayTeamName" #AwayTeamName="ngModel" [(ngModel)]="data.awayTeamName" class="form-control" [disabled]="dataId != 0" />
-            <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
+            <label for="AwayTeam">Away Team</label>
+            <select name="AwayTeam" id="AwayTeam" [(ngModel)]="data.awayTeamId" class="form-control">
+              <ng-container *ngFor="let team of teams">
+                <option [value]="team.teamId">{{team.name}}</option>
+              </ng-container>
+            </select>
+            <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
       </div>

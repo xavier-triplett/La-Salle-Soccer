@@ -4,6 +4,8 @@ import { Game } from '../../models/game.model';
 import { ToastrService } from 'ngx-toastr';
 import { GameService } from '../../services/game.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Team } from 'src/models/team.model';
+import { TeamService } from '../../services/team.service';
 
 @Component({
   selector: 'app-game-detail',
@@ -14,10 +16,12 @@ export class GameDetailComponent implements OnInit {
 	public dataId: number = 0;
 	public data: Game = new Game;
 	public myGames: number = 0;
+  public teams: Team[] = [];
 	private routeSub: Subscription;
 
 	constructor(
 		private _data: GameService,
+    private _teamsService: TeamService,
 		private _toastr: ToastrService,
 		private _router: Router,
 		private _route: ActivatedRoute
@@ -29,6 +33,12 @@ export class GameDetailComponent implements OnInit {
 			this.myGames = +params['mygames'];
 			this.reload();
 		});
+    this._teamsService.getTeams().then(res => {
+			this.teams = res;
+    },
+    err => {
+			this._toastr.error("Failed to get teams. Reason: " + err.statusText);
+    });
 	}
 
 	ngOnDestroy() {

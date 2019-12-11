@@ -11,7 +11,7 @@ export class GameService {
 	constructor(private http: HttpClient) { }
 
 	async postGame(game: Game) {
-		const result = await this.http.post(this.url + "/games", game)
+		const result = await this.http.post(this.url + '/games', game)
 			.toPromise();
 		return result as Game;
 	}
