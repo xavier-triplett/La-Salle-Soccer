@@ -24,5 +24,6 @@ namespace Capstone.Models
 
 		[NotMapped]
 		public string FullName { get; set; }
+
 	}
 }

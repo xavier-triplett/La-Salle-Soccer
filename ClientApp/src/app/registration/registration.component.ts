@@ -50,8 +50,8 @@ export class RegistrationComponent implements OnInit {
 				this.user.addressId = res;
 				this.insertUser();
 			} else {
-				this._addressService.postAddress(this.address).then(res => {
-					this.user.addressId = res.addressId;
+				this._addressService.postAddress(this.address).then(result => {
+					this.user.addressId = result.addressId;
 					this.insertUser();
 				},
 				err => {

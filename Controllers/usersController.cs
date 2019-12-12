@@ -39,12 +39,15 @@ namespace Capstone.Controllers
 		[HttpGet]
 		public ActionResult<IEnumerable<User>> GetUser()
 		{
+			List<User> items = _context.User
+				.Include(x => x.Address)
+				.ToList();
 
-			List<User> items = _context.User.ToList();
 			items.ForEach(x =>
 			{
 				x.FullName = x.FirstName + " " + x.LastName;
 			});
+
 			return items;
 		}
 
@@ -52,8 +55,8 @@ namespace Capstone.Controllers
 		[HttpGet("{id}")]
 		public ActionResult<User> GetUser(long id)
 		{
-
 			User item = _context.User
+				.Include(x => x.Address)
 				.Where(x => x.UserId == id)
 				.FirstOrDefault();
 
@@ -63,6 +66,7 @@ namespace Capstone.Controllers
 			}
 
 			item.FullName = item.FirstName + " " + item.LastName;
+
 			return item;
 		}
 
