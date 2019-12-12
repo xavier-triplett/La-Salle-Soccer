@@ -20,8 +20,23 @@ namespace Capstone.Controllers
             _context = context;
         }
 
-        // GET: api/Addresses
-        [HttpGet]
+		[HttpGet("[action]/{addressLine1}/{city}/{state}/{zip}")]
+		public Int64 AddressExists(String addressLine1, String city, String state, Int64 zip)
+		{
+			Address address = _context.Address
+				.Where(x => x.AddressLine1 == addressLine1 && x.City == city && x.State == state && x.Zip == zip)
+				.FirstOrDefault();
+
+			if (address == null)
+			{
+				return 0;
+			}
+
+			return address.AddressId;
+		}
+
+		// GET: api/Addresses
+		[HttpGet]
         public async Task<ActionResult<IEnumerable<Address>>> GetAddress()
         {
             return await _context.Address.ToListAsync();

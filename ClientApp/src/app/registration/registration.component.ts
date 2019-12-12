@@ -43,16 +43,26 @@ export class RegistrationComponent implements OnInit {
 		this.address = new Address;
 	}
 
-	//TODO: Add a function that checks if the address already exists. If it does use that address instead of creating one
 	onSubmit() {
 		this.address.zip = +this.address.zip;
-		this._addressService.postAddress(this.address).then(res => {
-			this.user.addressId = res.addressId;
-			this.insertUser();
+		this._addressService.addressExists(this.address.addressLine1, this.address.city, this.address.state, this.address.zip).then(res => {
+			if (res > 0) {
+				this.user.addressId = res;
+				this.insertUser();
+			} else {
+				this._addressService.postAddress(this.address).then(res => {
+					this.user.addressId = res.addressId;
+					this.insertUser();
+				},
+				err => {
+					this._toastr.error('Failed to create address. Reason: ' + err.statusText, 'Failure');
+				});
+			}
 		},
 		err => {
-			this._toastr.error('Failed to create address. Reason: ' + err.statusText, 'Failure');	
+			console.error('Failed to check if address exists. Reason: ' + err.statusText, 'Failure');	
 		});
+
 	}
 
 	insertUser() {

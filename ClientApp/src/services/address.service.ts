@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Address } from '../models/address.model';
 import { HttpClient } from "@angular/common/http";
+import { isUndefined } from 'util';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +15,12 @@ export class AddressService {
 		const result = await this.http.post(this.url + "/addresses", address)
 			.toPromise();
 		return result as Address;
+	}
+
+	async addressExists(addressLine1: string, city: string, state: string, zip: number) {
+		const result = await this.http.get(this.url + '/addresses/addressExists/' + addressLine1 + '/' + city + '/' + state + '/' + zip)
+			.toPromise();
+		return result as number;
 	}
 
 	async getAddresses() {
