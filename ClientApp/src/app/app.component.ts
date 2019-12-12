@@ -13,4 +13,8 @@ export class AppComponent {
 
 	}
 
+	get playerStatus(): boolean {
+		return this._auth.isPlayer;
+	}
+
 }

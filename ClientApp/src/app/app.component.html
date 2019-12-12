@@ -32,11 +32,11 @@
         <a class="navbar-item" routerLink="coaches">Coaches</a>
       </div>
 
-      <div *ngIf="_auth.isPlayer" class="navbar-brand">
+      <div *ngIf="playerStatus" class="navbar-brand">
         <a class="navbar-item" routerLink="teams/myteam">My Team</a>
       </div>
 
-      <div *ngIf="_auth.isPlayer" class="navbar-brand">
+      <div *ngIf="playerStatus" class="navbar-brand">
         <a class="navbar-item" routerLink="games/mygames">My Games</a>
       </div>
 

@@ -33,7 +33,7 @@ export class AuthService {
 		this.userId = value;
 
 		this._userService.isPlayer(this.userId).then(res => {
-			this.setIsPlayer(false);
+			this.setIsPlayer(res);
 		},
 			err => {
 				console.error("Failed to check if user is a player. Reason: " + err.statusText);

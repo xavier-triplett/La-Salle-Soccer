@@ -21,7 +21,7 @@ export class UserService {
 	async isPlayer(userId: number) {
 		const result = await this.http.get(this.url + '/users/isPlayer/' + userId)
 			.toPromise();
-		return result as Boolean;
+		return result as boolean;
 	}
 
 	async getUsers() {
