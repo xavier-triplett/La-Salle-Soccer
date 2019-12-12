@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
+import { AddressService } from '../../services/address.service';
+import { Address } from '../../models/address.model';
 
 @Component({
 	selector: 'app-user-detail',
@@ -14,10 +16,12 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
 	public dataId: number = 0;
 	public data: User = new User;
+	public addresses: Address[] = [];
 	private routeSub: Subscription;
 
 	constructor(
 		private _data: UserService,
+		private _addressService: AddressService,
 		private _toastr: ToastrService,
 		private _router: Router,
 		private _route: ActivatedRoute
@@ -27,6 +31,12 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 		this.routeSub = this._route.params.subscribe(params => {
 			this.dataId = +params['id'];
 			this.reload();
+		});
+		this._addressService.getAddresses().then(res => {
+			this.addresses = res;
+		},
+		err => {
+			this._toastr.error("Failed to get addresses. Reason: " + err.statusText);
 		});
 	}
 
@@ -55,6 +65,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 	}
 
 	onSubmit() {
+		this.data.addressId = +this.data.addressId;
 		if (this.dataId == 0) {
 			this._data.postUser(this.data).then(res => {
 				this._toastr.success("Successfully created user.", "Success");

@@ -50,8 +50,8 @@ export class GameDetailComponent implements OnInit {
 		else this._router.navigateByUrl('games');
 	}
 
-	goToDetail(id: number) {
-		this._router.navigateByUrl('games/item/' + id);
+	goToDetail(id: number, myGames: number) {
+		this._router.navigateByUrl('games/item/' + id + '/' + myGames);
 	}
 
 	reload() {
@@ -67,11 +67,17 @@ export class GameDetailComponent implements OnInit {
 	}
 
 	onSubmit() {
+		this.data.awayTeamId = +this.data.awayTeamId;
+		this.data.homeTeamId = +this.data.homeTeamId;
+		this.data.homeGoals = +this.data.homeGoals;
+		this.data.awayGoals = +this.data.awayGoals;
+		this.data.homePenaltyGoals = +this.data.homePenaltyGoals;
+		this.data.awayPenaltyGoals = +this.data.awayPenaltyGoals;
 		if (this.dataId == 0) {
 			this._data.postGame(this.data).then(res => {
 				this._toastr.success("Successfully created game.", "Success");
 				this.reload();
-				this.goToDetail(res.gameId);
+				this.goToDetail(res.gameId, this.myGames);
 			},
 			err => {
 				this._toastr.error("Failed to create game. Reason: " + err.statusText);

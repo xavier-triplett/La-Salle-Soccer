@@ -59,6 +59,19 @@
         </div>
       </div>
       <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="Address">Address</label>
+            <select name="Address" id="Address" [(ngModel)]="data.addressId" class="form-control">
+              <ng-container *ngFor="let address of addresses">
+                <option [value]="address.addressId">{{address.addressLine1}} {{address.city}}, {{address.state}} {{address.zip}}</option>
+              </ng-container>
+            </select>
+            <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-6">
           <div class="form-group">
             <button type="button" class="btn btn-lg btn-light btn-block" (click)="goToMaster()">Back</button>

@@ -13,7 +13,6 @@ namespace Capstone.Models
 	{
 		public virtual Address Address { get; set; }
 
-
 		public long UserId { get; set; }
 		public long AddressId { get; set; }
 		public string Username { get; set; }

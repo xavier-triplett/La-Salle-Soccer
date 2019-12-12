@@ -1,6 +1,6 @@
 export class Coach {
 	coachId: number;
-	userID: number;
+	userId: number;
 
 	//Not Mapped
 	firstName: string;

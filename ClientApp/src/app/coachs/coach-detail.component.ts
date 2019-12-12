@@ -66,6 +66,7 @@ export class CoachDetailComponent implements OnInit {
 	}
 
 	onSubmit() {
+		this.data.userId = +this.data.userId;
 		if (this.dataId == 0) {
 			this._data.postCoach(this.data).then(res => {
 				this._toastr.success("Successfully created coach.", "Success");

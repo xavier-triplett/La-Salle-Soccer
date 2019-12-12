@@ -78,6 +78,8 @@ export class PlayerDetailComponent implements OnInit, OnDestroy {
 	}
 
 	onSubmit() {
+		this.data.teamId = +this.data.teamId;
+		this.data.userId = +this.data.userId;
 		if (this.dataId == 0) {
 			this._data.postPlayer(this.data).then(res => {
 				this._toastr.success("Successfully created player.", "Success");

@@ -77,7 +77,8 @@ export class TeamDetailComponent implements OnInit, OnDestroy {
 		}
   }
 
-  onSubmit() {
+	onSubmit() {
+		this.data.coachId = +this.data.coachId;
     if (this.dataId == 0) {
       this._data.postTeam(this.data).then(res => {
 		    this._toastr.success("Successfully created team.", "Success");

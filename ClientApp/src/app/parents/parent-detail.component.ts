@@ -78,6 +78,8 @@ export class ParentDetailComponent implements OnInit {
 	}
 
 	onSubmit() {
+		this.data.playerId = +this.data.playerId;
+		this.data.userId = +this.data.userId;
 		if (this.dataId == 0) {
 			this._data.postParent(this.data).then(res => {
 				this._toastr.success("Successfully created parent.", "Success");
