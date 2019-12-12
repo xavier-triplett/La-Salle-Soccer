@@ -33,7 +33,7 @@ namespace Capstone.Controllers
 				x.FirstName = x.User.FirstName;
 				x.LastName = x.User.LastName;
 				x.FullName = x.User.FirstName + " " + x.User.LastName;
-				x.DateOfBirth = x.User.DateOfBirth.Value;
+				//x.DateOfBirth = x.User.DateOfBirth.Value;
 				x.Gender = x.User.Gender;
 
 				Player player = _context.Player
@@ -62,7 +62,7 @@ namespace Capstone.Controllers
 
 			item.FirstName = item.User.FirstName;
 			item.LastName = item.User.LastName;
-			item.DateOfBirth = item.User.DateOfBirth.Value;
+			//item.DateOfBirth = item.User.DateOfBirth.Value;
 			item.Gender = item.User.Gender;
 			item.FullName = item.User.FirstName + " " + item.User.LastName;
 
