@@ -45,6 +45,7 @@ export class RegistrationComponent implements OnInit {
 
 	//TODO: Add a function that checks if the address already exists. If it does use that address instead of creating one
 	onSubmit() {
+		this.address.zip = +this.address.zip;
 		this._addressService.postAddress(this.address).then(res => {
 			this.user.addressId = res.addressId;
 			this.insertUser();

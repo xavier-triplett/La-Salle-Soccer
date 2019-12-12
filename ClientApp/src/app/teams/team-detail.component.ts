@@ -35,9 +35,8 @@ export class TeamDetailComponent implements OnInit, OnDestroy {
 				this.reload();
 			});
 		} else {
-      //TODO: pass this.userId as a search option
-			this._data.getTeams().then(res => {
-				this.dataId = res[0].teamId;
+			this._data.getUsersTeam(this.userId).then(res => {
+				this.dataId = res.teamId;
 				this.reload();
 			},
 			err => {

@@ -33,6 +33,4 @@ export class AuthService {
 	get currentUserId() {
 		return this.userId;
 	}
-	//TODO: create a try login function
-
 }

@@ -6,6 +6,7 @@ import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { AddressService } from '../../services/address.service';
 import { Address } from '../../models/address.model';
+import * as moment from 'moment';
 
 @Component({
 	selector: 'app-user-detail',

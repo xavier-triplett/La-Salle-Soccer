@@ -4,6 +4,7 @@ import { Game } from '../../models/game.model';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-game-master',
@@ -15,10 +16,12 @@ export class GameMasterComponent implements OnInit {
 	@Input() useId: boolean = false;
   
   public games: Game[] = [];
-  public gamesToDelete: Game[] = [];
+	public gamesToDelete: Game[] = [];
+	public userId: number = 0;
 
   constructor(
 	  private _data: GameService,
+	  private _auth: AuthService,
     private _toastr: ToastrService,
     private _router: Router
     ) { }
@@ -37,14 +40,21 @@ export class GameMasterComponent implements OnInit {
 		this.games = [];
 
 		if (this.useId) {
-            //set searchoption of user id
+			this.userId = this._auth.currentUserId;
+			this._data.getUsersGame(this.userId).then(res => {
+				this.games = res;
+			},
+			err => {
+				this._toastr.error("Failed to get users games. Reason: " + err.statusText);
+			});
+		} else {
+			this._data.getGames().then(res => {
+				this.games = res;
+			},
+			err => {
+				this._toastr.error("Failed to get games. Reason: " + err.statusText);
+			});
 		}
-    this._data.getGames().then(res => {
-		  this.games = res;
-	  },
-		err => {
-			this._toastr.error("Failed to get games. Reason: " + err.statusText);
-		});
   }
 
   get deleteValid() {

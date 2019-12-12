@@ -20,6 +20,31 @@ namespace Capstone.Controllers
             _context = context;
         }
 
+		[HttpGet("[action]/{userId}")]
+		public ActionResult<Team> GetUsersTeam(long userId)
+		{
+			Player player = _context.Player
+				.Include(x => x.User)
+				.Where(x => x.User.UserId == userId)
+				.FirstOrDefault();
+
+			if (player == null)
+			{
+				return NotFound();
+			}
+
+			Team team = _context.Team
+				.Where(x => x.TeamId == player.TeamId)
+				.FirstOrDefault();
+
+			if (team == null)
+			{
+				return NotFound();
+			}
+
+			return team;
+		}
+
 		// GET: api/Teams
 		[HttpGet]
 		public ActionResult<IEnumerable<Team>> GetTeam()

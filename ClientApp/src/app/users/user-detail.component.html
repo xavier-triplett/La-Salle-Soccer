@@ -46,15 +46,26 @@
         <div class="col-md-6">
           <div class="form-group">
             <label>Date Of Birth</label>
-            <input name="DateOfBirth" #DateOfBirth="ngModel" type="date" [(ngModel)]="data.dateOfBirth" class="form-control" required />
+            <input name="DateOfBirth" #DateOfBirth="ngModel" type="datetime-local" [(ngModel)]="data.dateOfBirth" class="form-control" required />
             <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-2">
           <div class="form-group">
-            <label>Gender</label>
-            <input name="Gender" #Gender="ngModel" [(ngModel)]="data.gender" class="form-control" required />
-            <!--<label *ngIf="Username.invalid && Username.touched" class="validation-error">This field is required</label>-->
+            <label>Male</label>
+            <input name="Gender" #Gender="ngModel" type="radio" [(ngModel)]="data.gender" [value]="'Male'" class="form-control" />
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>Female</label>
+            <input name="Gender" #Gender="ngModel" type="radio" [(ngModel)]="data.gender" [value]="'Female'" class="form-control" />
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>Other</label>
+            <input name="Gender" #Gender="ngModel" type="radio" [(ngModel)]="data.gender" [value]="'Other'" class="form-control" />
           </div>
         </div>
       </div>

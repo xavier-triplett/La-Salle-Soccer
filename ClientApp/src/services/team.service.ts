@@ -16,6 +16,12 @@ export class TeamService {
 		return result as Team;
 	}
 
+	async getUsersTeam(userId: number) {
+		const result = await this.http.get(this.url + '/teams/getUsersTeam/' + userId)
+			.toPromise();
+		return result as Team;
+	}
+
 	async getTeams() {
 		const result = await this.http.get(this.url + '/teams')
 			.toPromise();

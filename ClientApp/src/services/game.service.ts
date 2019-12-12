@@ -16,6 +16,12 @@ export class GameService {
 		return result as Game;
 	}
 
+	async getUsersGame(userId: number) {
+		const result = await this.http.get(this.url + '/games/getUsersGames/' + userId)
+			.toPromise();
+		return result as Game[];
+	}
+
 	async getGames() {
 		const result = await this.http.get(this.url + '/games')
 			.toPromise();
