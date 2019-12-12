@@ -8,7 +8,7 @@ export class AppComponent {
 	title = 'Club League';
 
 	constructor(
-		public auth: AuthService
+		public _auth: AuthService
 	) {
 
 	}

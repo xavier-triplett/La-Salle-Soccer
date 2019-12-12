@@ -24,8 +24,7 @@ namespace Capstone.Controllers
 		public ActionResult<Team> GetUsersTeam(long userId)
 		{
 			Player player = _context.Player
-				.Include(x => x.User)
-				.Where(x => x.User.UserId == userId)
+				.Where(x => x.UserId == userId)
 				.FirstOrDefault();
 
 			if (player == null)

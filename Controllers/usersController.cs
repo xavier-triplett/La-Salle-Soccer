@@ -20,6 +20,21 @@ namespace Capstone.Controllers
             _context = context;
         }
 
+		[HttpGet("[action]/{userId}")]
+		public Boolean IsPlayer(long userId)
+		{
+			Player player = _context.Player
+				.Where(x => x.UserId == userId)
+				.FirstOrDefault();
+
+			if (player == null)
+			{
+				return false;
+			}
+
+			return true;
+		}
+
 		// GET: api/Users
 		[HttpGet]
 		public ActionResult<IEnumerable<User>> GetUser()

@@ -18,6 +18,12 @@ export class UserService {
 		return result as User;
 	}
 
+	async isPlayer(userId: number) {
+		const result = await this.http.get(this.url + '/users/isPlayer/' + userId)
+			.toPromise();
+		return result as Boolean;
+	}
+
 	async getUsers() {
 		const result = await this.http.get(this.url + '/users')
 			.toPromise();

@@ -1,4 +1,4 @@
-<ng-container *ngIf="auth.isLoggedIn; else login">
+<ng-container *ngIf="_auth.isLoggedIn; else login">
   <!-- Profile Bar -->
   <div class="card mr-0">
     <div class="row">
@@ -32,11 +32,11 @@
         <a class="navbar-item" routerLink="coaches">Coaches</a>
       </div>
 
-      <div class="navbar-brand">
+      <div *ngIf="_auth.isPlayer" class="navbar-brand">
         <a class="navbar-item" routerLink="teams/myteam">My Team</a>
       </div>
 
-      <div class="navbar-brand">
+      <div *ngIf="_auth.isPlayer" class="navbar-brand">
         <a class="navbar-item" routerLink="games/mygames">My Games</a>
       </div>
 
