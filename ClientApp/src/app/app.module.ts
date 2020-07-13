@@ -31,7 +31,7 @@ import { CoachDetailComponent } from './coachs/coach-detail.component';
 import { ParentMasterComponent } from './parents/parent-master.component';
 import { ParentDetailComponent } from './parents/parent-detail.component';
 import { QuestionnaireDetailComponent } from './questionnaire/questionnaire-detail.component';
-import { QuestionnaireMasterComponent } from './questionnaire/questionnaire-master/questionnaire-master.component';
+import { QuestionnaireMasterComponent } from './questionnaire/questionnaire-master.component';
 
 @NgModule({
   declarations: [
