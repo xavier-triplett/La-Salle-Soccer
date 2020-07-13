@@ -30,6 +30,8 @@ import { CoachMasterComponent } from './coachs/coach-master.component';
 import { CoachDetailComponent } from './coachs/coach-detail.component';
 import { ParentMasterComponent } from './parents/parent-master.component';
 import { ParentDetailComponent } from './parents/parent-detail.component';
+import { QuestionnaireDetailComponent } from './questionnaire/questionnaire-detail.component';
+import { QuestionnaireMasterComponent } from './questionnaire/questionnaire-master/questionnaire-master.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { ParentDetailComponent } from './parents/parent-detail.component';
 		CoachMasterComponent,
 		CoachDetailComponent,
 		ParentMasterComponent,
-		ParentDetailComponent
+		ParentDetailComponent,
+		QuestionnaireDetailComponent,
+		QuestionnaireMasterComponent
   ],
   imports: [
     BrowserModule,

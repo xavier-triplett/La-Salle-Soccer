@@ -1,0 +1,39 @@
+<div class="jumbotron">
+  <h1 class="display-4 text-center">{{title}}</h1>
+  <div class="row">
+    <div class="col-md-8"></div>
+    <div class="col-md-4 float-right"><button class="btn btn-primary mb-2" (click)="goToDetail(0)">Add New Questionnaire</button><button class="btn btn-danger mb-2 ml-2" [disabled]="!deleteValid" (click)="deleteGames()">Delete Selected Games</button></div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col">Home Team</th>
+              <th scope="col">Away Team</th>
+              <th scope="col">Home Score</th>
+              <th scope="col">Away Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let game of games">
+              <tr>
+                <td *ngIf="!containsGame(game)"><input type="checkbox" (click)="gamesToDelete.push(game)" /></td>
+                <td *ngIf="containsGame(game)"><input type="checkbox" (click)="removeGame(game)" checked /></td>
+                <td><button class="btn btn-primary" (click)="goToDetail(game.gameId)">Edit</button></td>
+                <td>{{game.homeTeamName}}</td>
+                <td>{{game.awayTeamName}}</td>
+                <td>{{game.homeGoals}}</td>
+                <td>{{game.awayGoals}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

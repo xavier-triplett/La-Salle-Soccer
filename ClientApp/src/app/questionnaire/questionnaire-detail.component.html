@@ -1,0 +1,37 @@
+<div class="jumbotron" (onSubmit)="onSubmit()">
+  <h1 class="display-4 text-center">Questionnaire</h1>
+  <hr />
+  <div class="row">
+    <div class="col-md-12">
+      <form (onSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Username</label>
+              <input name="Username" [(ngModel)]="username" class="form-control" required />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Password</label>
+              <input name="Password" type="password" [(ngModel)]="password" class="form-control" required />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <button type="button" class="btn btn-lg btn-primary btn-block" (click)="goToRegistration()">Register</button>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <button class="btn btn-lg btn-primary btn-block" (click)="onSubmit()">Login</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
