@@ -1,0 +1,68 @@
+﻿7/13/2020
+Creating Tables
+
+CREATE TABLE Game ( 
+    GameId bigint,
+    HomeTeamId bigint,
+    AwayTeamId bigint,
+    DateAndTime DateTime,
+    HomeGoals int,
+    AwayGoals int,
+    HomePenaltyGoals int,
+    AwayPenaltyGoals int,
+	PRIMARY KEY (GameId)
+);
+
+CREATE TABLE Team ( 
+    TeamId bigint,
+    CoachId bigint,
+    Name varchar(255),
+    Gender varchar(255),
+    BirthYear int,
+    HomeLocation varchar(255), (TO BE REPLACED BY Address)
+	PRIMARY KEY (TeamId)  
+);
+
+CREATE TABLE Soccer_User ( 
+    UserId bigint,
+    AddressId bigint,
+    Username varchar(255),
+    Password varchar(255),   (TO BE REMOVED)
+    FirstName varchar(255),
+    LastName varchar(255),
+	DateOfBirth DateTime,
+	Gender varchar(255),
+	PRIMARY KEY (UserId)
+);				   
+
+CREATE TABLE Player ( 
+    PlayerId bigint,
+    UserId bigint,
+    TeamId bigint,
+    DominateFoot varchar(255),
+	PRIMARY KEY (PlayerId)
+);
+
+
+CREATE TABLE User_Address ( 
+    AddressId bigint,
+    AddressLine1 varchar(255),
+	AddressLine2 varchar(255),
+    City varchar(255),
+	State varchar(255),
+	Zip int,
+	PRIMARY KEY (AddressId)
+);
+
+CREATE TABLE Parent ( 
+	ParentId bigint,
+    PlayerId bigint,
+    UserId bigint,
+	PRIMARY KEY (ParentId)
+);
+
+CREATE TABLE Coach ( 
+	CoachId bigint,
+    UserId bigint ,
+	PRIMARY KEY (CoachId)
+);
