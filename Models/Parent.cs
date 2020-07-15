@@ -7,14 +7,16 @@ namespace Capstone.Models
 {
 	using System;
 	using System.Collections.Generic;
+	using System.ComponentModel.DataAnnotations;
 	using System.ComponentModel.DataAnnotations.Schema;
 
 	public partial class Parent
 	{
 		public virtual Player Player { get; set; }
-		public virtual User User { get; set; }
+		public virtual SoccerUser User { get; set; }
 
 
+		[Key]
 		public long ParentId { get; set; }
 		public long PlayerId { get; set; }
 		public long UserId { get; set; }

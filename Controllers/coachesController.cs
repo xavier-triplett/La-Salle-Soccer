@@ -11,11 +11,11 @@ namespace Capstone.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class coachesController : ControllerBase
+    public class CoachesController : ControllerBase
     {
         private readonly DBContext _context;
 
-        public coachesController(DBContext context)
+        public CoachesController(DBContext context)
         {
             _context = context;
         }

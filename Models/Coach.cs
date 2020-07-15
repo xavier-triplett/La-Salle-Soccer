@@ -7,14 +7,17 @@ namespace Capstone.Models
 {
 	using System;
 	using System.Collections.Generic;
-	using System.ComponentModel.DataAnnotations.Schema;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
 	public partial class Coach
 	{
-		public virtual User User { get; set; }
+		public virtual SoccerUser User { get; set; }
 
 
+		[Key]
 		public long CoachId { get; set; }
+
 		public long UserId { get; set; }
 
 		[NotMapped]

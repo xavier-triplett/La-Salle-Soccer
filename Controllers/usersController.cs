@@ -37,9 +37,9 @@ namespace Capstone.Controllers
 
 		// GET: api/Users
 		[HttpGet]
-		public ActionResult<IEnumerable<User>> GetUser()
+		public ActionResult<IEnumerable<SoccerUser>> GetUser()
 		{
-			List<User> items = _context.User
+			List<SoccerUser> items = _context.User
 				.Include(x => x.Address)
 				.ToList();
 
@@ -53,9 +53,9 @@ namespace Capstone.Controllers
 
 		// GET: api/Users/5
 		[HttpGet("{id}")]
-		public ActionResult<User> GetUser(long id)
+		public ActionResult<SoccerUser> GetUser(long id)
 		{
-			User item = _context.User
+			SoccerUser item = _context.User
 				.Include(x => x.Address)
 				.Where(x => x.UserId == id)
 				.FirstOrDefault();
@@ -74,7 +74,7 @@ namespace Capstone.Controllers
 		// To protect from overposting attacks, please enable the specific properties you want to bind to, for
 		// more details see https://aka.ms/RazorPagesCRUD.
 		[HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(long id, User user)
+        public async Task<IActionResult> PutUser(long id, SoccerUser user)
         {
             if (id != user.UserId)
             {
@@ -106,7 +106,7 @@ namespace Capstone.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<SoccerUser>> PostUser(SoccerUser user)
         {
             _context.User.Add(user);
             await _context.SaveChangesAsync();
@@ -116,7 +116,7 @@ namespace Capstone.Controllers
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(long id)
+        public async Task<ActionResult<SoccerUser>> DeleteUser(long id)
         {
             var user = await _context.User.FindAsync(id);
             if (user == null)
@@ -136,9 +136,9 @@ namespace Capstone.Controllers
         }
 
 		[HttpGet("[action]/{username}/{password}")]
-		public ActionResult<User> TryLogin(String username, String password)
+		public ActionResult<SoccerUser> TryLogin(String username, String password)
 		{
-			User item = _context.User.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
+			SoccerUser item = _context.User.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
 			if (item == null)
 			{
 				item = _context.User.Where(x => x.Username == username).FirstOrDefault();

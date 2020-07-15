@@ -7,6 +7,7 @@ namespace Capstone.Models
 {
 	using System;
 	using System.Collections.Generic;
+	using System.ComponentModel.DataAnnotations;
 	using System.ComponentModel.DataAnnotations.Schema;
 
 	public partial class Game
@@ -15,6 +16,7 @@ namespace Capstone.Models
 		public virtual Team AwayTeam { get; set; }
 
 
+		[Key]
 		public long GameId { get; set; }
 		public long HomeTeamId { get; set; }
 		public long AwayTeamId { get; set; }

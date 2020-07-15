@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/user.model';
+import { SoccerUser } from '../models/socceruser.model';
 import { HttpClient } from "@angular/common/http";
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,10 @@ export class UserService {
 		private http: HttpClient
   ) {}
 
-	async postUser(user: User) {
+	async postUser(user: SoccerUser) {
 		const result = await this.http.post(this.url + "/users", user)
 			.toPromise();
-		return result as User;
+		return result as SoccerUser;
 	}
 
 	async isPlayer(userId: number) {
@@ -27,30 +27,30 @@ export class UserService {
 	async getUsers() {
 		const result = await this.http.get(this.url + '/users')
 			.toPromise();
-		return result as User[];
+		return result as SoccerUser[];
 	}
 
 	async getUser(id: number) {
 		const result = await this.http.get(this.url + '/users/' + id)
 			.toPromise();
-		return result as User;
+		return result as SoccerUser;
 	}
 
-	async putUser(user: User, id: number) {
+	async putUser(user: SoccerUser, id: number) {
 		const result = await this.http.put(this.url + '/users/' + id, user)
 			.toPromise();
-		return result as User;
+		return result as SoccerUser;
 	}
 
 	async deleteUser(id: number) {
 		const result = await this.http.delete(this.url + '/users/' + id)
 			.toPromise();
-		return result as User;
+		return result as SoccerUser;
 	}
 
 	async tryLogin(username: string, password: string) {
 		const result = await this.http.get(this.url + '/users/tryLogin/' + username + '/' + password)
 			.toPromise();
-		return result as User;
+		return result as SoccerUser;
 	}
 }

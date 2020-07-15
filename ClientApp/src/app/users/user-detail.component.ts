@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { User } from '../../models/user.model';
+import { SoccerUser } from '../../models/socceruser.model';
 import { UserService } from '../../services/user.service';
 import { AddressService } from '../../services/address.service';
-import { Address } from '../../models/address.model';
+import { UserAddress } from '../../models/useraddress.model';
 import * as moment from 'moment';
 
 @Component({
@@ -16,8 +16,8 @@ import * as moment from 'moment';
 export class UserDetailComponent implements OnInit, OnDestroy {
 
 	public dataId: number = 0;
-	public data: User = new User;
-	public address = new Address;
+	public data: SoccerUser = new SoccerUser;
+	public address: UserAddress = new UserAddress;
 	private routeSub: Subscription;
 
 	constructor(

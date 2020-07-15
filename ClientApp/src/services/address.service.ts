@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Address } from '../models/address.model';
+import { UserAddress } from '../models/useraddress.model';
 import { HttpClient } from "@angular/common/http";
 import { isUndefined } from 'util';
 @Injectable({
@@ -11,10 +11,10 @@ export class AddressService {
 
 	constructor(private http: HttpClient) { }
 
-	async postAddress(address: Address) {
+	async postAddress(address: UserAddress) {
 		const result = await this.http.post(this.url + "/addresses", address)
 			.toPromise();
-		return result as Address;
+		return result as UserAddress;
 	}
 
 	async addressExists(addressLine1: string, city: string, state: string, zip: number) {
@@ -26,24 +26,24 @@ export class AddressService {
 	async getAddresses() {
 		const result = await this.http.get(this.url + '/addresses')
 			.toPromise();
-		return result as Address[];
+		return result as UserAddress[];
 	}
 
 	async getAddress(id: number) {
 		const result = await this.http.get(this.url + '/addresses/' + id)
 			.toPromise();
-		return result as Address;
+		return result as UserAddress;
 	}
 
-	async putAddress(address: Address, id: number) {
+	async putAddress(address: UserAddress, id: number) {
 		const result = await this.http.put(this.url + '/addresses/' + id, address)
 			.toPromise();
-		return result as Address;
+		return result as UserAddress;
 	}
 
 	async deleteAddress(id: number) {
 		const result = await this.http.delete(this.url + '/addresses/' + id)
 			.toPromise();
-		return result as Address;
+		return result as UserAddress;
 	}
 }

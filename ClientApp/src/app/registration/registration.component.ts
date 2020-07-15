@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { User } from '../../models/user.model';
+import { SoccerUser } from '../../models/socceruser.model';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Address } from 'src/models/address.model';
+import { UserAddress } from 'src/models/useraddress.model';
 import { AddressService } from 'src/services/address.service';
 import { AuthService } from 'src/services/auth.service';
 
@@ -15,8 +15,8 @@ import { AuthService } from 'src/services/auth.service';
 })
 export class RegistrationComponent implements OnInit {
 
-	public user = new User;
-	public address = new Address;
+	public user = new SoccerUser;
+	public address = new UserAddress;
 
 	constructor(
 		private _auth: AuthService,
@@ -39,8 +39,8 @@ export class RegistrationComponent implements OnInit {
 	}
 
 	reload() {
-		this.user = new User;
-		this.address = new Address;
+		this.user = new SoccerUser;
+		this.address = new UserAddress;
 	}
 
 	onSubmit() {

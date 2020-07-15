@@ -1,4 +1,4 @@
-export class User {
+export class SoccerUser {
 	userId: number;
 	addressId: number;
 	username: string;

@@ -7,12 +7,14 @@ namespace Capstone.Models
 {
 	using System;
 	using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
+	using System.ComponentModel.DataAnnotations;
+	using System.ComponentModel.DataAnnotations.Schema;
 
-    public partial class User
+    public partial class SoccerUser
 	{
-		public virtual Address Address { get; set; }
+		public virtual UserAddress Address { get; set; }
 
+		[Key]
 		public long UserId { get; set; }
 		public long AddressId { get; set; }
 		public string Username { get; set; }

@@ -8,7 +8,7 @@ import * as moment from 'moment';
 import { TeamService } from '../../services/team.service';
 import { Team } from '../../models/team.model';
 import { UserService } from '../../services/user.service';
-import { User } from '../../models/user.model';
+import { SoccerUser } from '../../models/socceruser.model';
 
 @Component({
   selector: 'app-player-detail',
@@ -20,7 +20,7 @@ export class PlayerDetailComponent implements OnInit, OnDestroy {
 	public dataId: number = 0;
 	public data: Player = new Player;
 	public teams: Team[] = [];
-	public users: User[] = [];
+	public users: SoccerUser[] = [];
 	private routeSub: Subscription;
 
 	constructor(

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { User } from 'src/models/user.model';
+import { SoccerUser } from 'src/models/socceruser.model';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -12,8 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class UserMasterComponent implements OnInit {
   @Input() title: string = "Users";
 
-	public users: User[] = [];
-	public usersToDelete: User[] = [];
+	public users: SoccerUser[] = [];
+	public usersToDelete: SoccerUser[] = [];
 
   constructor(
 	  private _data: UserService,
@@ -45,11 +45,11 @@ export class UserMasterComponent implements OnInit {
 		return this.usersToDelete.length > 0;
 	}
 
-	containsUser(user: User): boolean {
+	containsUser(user: SoccerUser): boolean {
 		return this.usersToDelete.includes(user);
 	}
 
-	removeUser(user: User) {
+	removeUser(user: SoccerUser) {
 		this.usersToDelete = this.usersToDelete.filter(x => x.userId != user.userId);
 	}
 
