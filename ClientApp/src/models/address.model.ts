@@ -1,4 +1,4 @@
-export class UserAddress {
+export class Address {
 	addressId: number;
 	addressLine1: string;
 	addressLine2: string;

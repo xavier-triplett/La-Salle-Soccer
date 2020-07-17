@@ -5,7 +5,7 @@ import { CoachService } from '../../services/coach.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
-import { SoccerUser } from '../../models/socceruser.model';
+import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -16,7 +16,7 @@ import { UserService } from '../../services/user.service';
 export class CoachDetailComponent implements OnInit {
 	public dataId: number = 0;
 	public data: Coach = new Coach;
-	public users: SoccerUser[] = [];
+	public users: User[] = [];
 	private routeSub: Subscription;
 
 	constructor(

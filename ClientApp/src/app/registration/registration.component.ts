@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { SoccerUser } from '../../models/socceruser.model';
+import { User } from '../../models/user.model';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { UserAddress } from 'src/models/useraddress.model';
+import { Address } from 'src/models/address.model';
 import { AddressService } from 'src/services/address.service';
 import { AuthService } from 'src/services/auth.service';
 
@@ -15,8 +15,9 @@ import { AuthService } from 'src/services/auth.service';
 })
 export class RegistrationComponent implements OnInit {
 
-	public user = new SoccerUser;
-	public address = new UserAddress;
+	public user = new User;
+	public address = new Address;
+	public verifiedPassword: string;
 
 	constructor(
 		private _auth: AuthService,
@@ -39,12 +40,16 @@ export class RegistrationComponent implements OnInit {
 	}
 
 	reload() {
-		this.user = new SoccerUser;
-		this.address = new UserAddress;
+		this.user = new User;
+		this.address = new Address;
 	}
 
 	onSubmit() {
 		this.address.zip = +this.address.zip;
+		if (this.user.password != this.verifiedPassword) {
+			this._toastr.error("Passwords must match. Please double check them");
+			return;
+		}
 		this._addressService.addressExists(this.address.addressLine1, this.address.city, this.address.state, this.address.zip).then(res => {
 			if (res > 0) {
 				this.user.addressId = res;

@@ -12,7 +12,7 @@ namespace Capstone.Models
 
 	public partial class Coach
 	{
-		public virtual SoccerUser User { get; set; }
+		public virtual User User { get; set; }
 
 
 		[Key]

@@ -13,7 +13,7 @@ namespace Capstone.Models
 	public partial class Player
 	{
 		public virtual Team Team { get; set; }
-		public virtual SoccerUser User { get; set; }
+		public virtual User User { get; set; }
 
 
 		[Key]

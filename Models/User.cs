@@ -10,9 +10,9 @@ namespace Capstone.Models
 	using System.ComponentModel.DataAnnotations;
 	using System.ComponentModel.DataAnnotations.Schema;
 
-    public partial class SoccerUser
+    public partial class User
 	{
-		public virtual UserAddress Address { get; set; }
+		public virtual Address Address { get; set; }
 
 		[Key]
 		public long UserId { get; set; }

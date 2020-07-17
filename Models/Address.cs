@@ -10,7 +10,7 @@ namespace Capstone.Models
 	using System.ComponentModel.DataAnnotations;
 	using System.ComponentModel.DataAnnotations.Schema;
 
-	public partial class UserAddress
+	public partial class Address
 	{
 		[Key]
 		public long AddressId { get; set; }
@@ -18,6 +18,6 @@ namespace Capstone.Models
 		public string AddressLine2 { get; set; }
 		public string City { get; set; }
 		public string State { get; set; }
-		public Nullable<int> Zip { get; set; }
+		public int Zip { get; set; }
 	}
 }

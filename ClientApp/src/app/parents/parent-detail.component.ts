@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { PlayerService } from '../../services/player.service';
 import { UserService } from '../../services/user.service';
-import { SoccerUser } from '../../models/socceruser.model';
+import { User } from '../../models/user.model';
 import { Player } from '../../models/player.model';
 
 @Component({
@@ -19,7 +19,7 @@ export class ParentDetailComponent implements OnInit {
 
 	public dataId: number = 0;
 	public data: Parent = new Parent;
-	public users: SoccerUser[] = [];
+	public users: User[] = [];
 	public players: Player[] = [];
 	private routeSub: Subscription;
 

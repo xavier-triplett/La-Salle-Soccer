@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { SoccerUser } from '../../models/socceruser.model';
+import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { AddressService } from '../../services/address.service';
-import { UserAddress } from '../../models/useraddress.model';
+import { Address } from '../../models/address.model';
 import * as moment from 'moment';
 
 @Component({
@@ -14,10 +14,12 @@ import * as moment from 'moment';
 	styleUrls: ['./user-detail.component.scss']
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
+	@Input() title: string = "New User";
 
 	public dataId: number = 0;
-	public data: SoccerUser = new SoccerUser;
-	public address: UserAddress = new UserAddress;
+	public verifiedPassword: string;
+	public data: User = new User;
+	public address: Address = new Address;
 	private routeSub: Subscription;
 
 	constructor(
@@ -54,6 +56,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 				this.dataId = res.userId;
 				this._addressService.getAddress(this.data.addressId).then(result => {
 					this.address = result;
+					this.verifiedPassword = this.data.password;
 				},
 				err => {
 					this._toastr.error("Failed to get address. Reason: " + err.statusText);
@@ -66,8 +69,11 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 	}
 
 	onSubmit() {
-		console.log(this.data);
 		this.address.zip = +this.address.zip;
+		if (this.data.password != this.verifiedPassword) {
+			this._toastr.error("Passwords must match. Please double check them");
+			return;
+		}
 		if (this.dataId == 0) {
 			this._addressService.addressExists(this.address.addressLine1, this.address.city, this.address.state, this.address.zip).then(res => {
 				if (res > 0) {

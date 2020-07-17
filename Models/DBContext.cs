@@ -9,8 +9,8 @@ namespace Capstone.Models
 
 		}
 
-		public DbSet<SoccerUser> User { get; set; }
-		public DbSet<UserAddress> Address { get; set; }
+		public DbSet<User> User { get; set; }
+		public DbSet<Address> Address { get; set; }
 		public DbSet<Coach> Coach { get; set; }
 		public DbSet<Player> Player { get; set; }
 		public DbSet<Parent> Parent { get; set; }
