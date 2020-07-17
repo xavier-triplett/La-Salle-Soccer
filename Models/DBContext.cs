@@ -16,6 +16,7 @@ namespace Capstone.Models
 		public DbSet<Parent> Parent { get; set; }
 		public DbSet<Game> Game { get; set; }
 		public DbSet<Team> Team { get; set; }
+		public DbSet<Questionnaire> Questionnaire { get; set; }
 
 	}
 }
