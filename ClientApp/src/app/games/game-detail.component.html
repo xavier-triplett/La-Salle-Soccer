@@ -9,76 +9,74 @@
   </ng-template>
   <div class="row">
     <div class="col-md-12">
-      <form (onSubmit)="onSubmit()">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="HomeTeam">Home Team</label>
-              <select name="HomeTeam" id="HomeTeam" [(ngModel)]="data.homeTeamId" class="form-control">
-                <ng-container *ngFor="let team of teams">
-                  <option [value]="team.teamId">{{team.name}}</option>
-                </ng-container>
-              </select>
-              <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="AwayTeam">Away Team</label>
-              <select name="AwayTeam" id="AwayTeam" [(ngModel)]="data.awayTeamId" class="form-control">
-                <ng-container *ngFor="let team of teams">
-                  <option [value]="team.teamId">{{team.name}}</option>
-                </ng-container>
-              </select>
-              <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
-            </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="HomeTeam">Home Team</label>
+            <select name="HomeTeam" id="HomeTeam" [(ngModel)]="data.homeTeamId" class="form-control">
+              <ng-container *ngFor="let team of teams">
+                <option [value]="team.teamId">{{team.name}}</option>
+              </ng-container>
+            </select>
+            <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Home Score</label>
-              <input name="HomeGoals" #HomeGoals="ngModel" [(ngModel)]="data.homeGoals" class="form-control" required />
-              <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Away Score</label>
-              <input name="AwayGoals" #AwayGoals="ngModel" [(ngModel)]="data.awayGoals" class="form-control" required />
-              <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
-            </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="AwayTeam">Away Team</label>
+            <select name="AwayTeam" id="AwayTeam" [(ngModel)]="data.awayTeamId" class="form-control">
+              <ng-container *ngFor="let team of teams">
+                <option [value]="team.teamId">{{team.name}}</option>
+              </ng-container>
+            </select>
+            <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Home Penalty Score</label>
-              <input name="HomePenaltyGoals" #HomePenaltyGoals="ngModel" [(ngModel)]="data.homePenaltyGoals" class="form-control" required />
-              <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Away Penalty Score</label>
-              <input name="AwayPenaltyGoals" #AwayPenaltyGoals="ngModel" [(ngModel)]="data.awayPenaltyGoals" class="form-control" required />
-              <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
-            </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Home Score</label>
+            <input name="HomeGoals" #HomeGoals="ngModel" [(ngModel)]="data.homeGoals" class="form-control" required />
+            <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <button type="button" class="btn btn-lg btn-light btn-block" (click)="goToMaster()">Back</button>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <button type="button" class="btn btn-lg btn-primary btn-block" (click)="onSubmit()">Save</button>
-            </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Away Score</label>
+            <input name="AwayGoals" #AwayGoals="ngModel" [(ngModel)]="data.awayGoals" class="form-control" required />
+            <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
-      </form>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Home Penalty Score</label>
+            <input name="HomePenaltyGoals" #HomePenaltyGoals="ngModel" [(ngModel)]="data.homePenaltyGoals" class="form-control" required />
+            <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Away Penalty Score</label>
+            <input name="AwayPenaltyGoals" #AwayPenaltyGoals="ngModel" [(ngModel)]="data.awayPenaltyGoals" class="form-control" required />
+            <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <button type="button" class="btn btn-lg btn-light btn-block" (click)="goToMaster()">Back</button>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <button type="button" class="btn btn-lg btn-primary btn-block" (click)="onSubmit()">Save</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

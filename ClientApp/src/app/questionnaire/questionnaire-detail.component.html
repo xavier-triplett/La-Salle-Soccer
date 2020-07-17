@@ -3,34 +3,31 @@
   <hr />
   <div class="row">
     <div class="col-md-12">
-      <form (onSubmit)="onSubmit()">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Username</label>
-              <input name="Username" [(ngModel)]="username" class="form-control" required />
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Password</label>
-              <input name="Password" type="password" [(ngModel)]="password" class="form-control" required />
-            </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="Player">Player</label>
+            <select name="Player" id="Player" [(ngModel)]="data.playerId" class="form-control">
+              <ng-container *ngFor="let player of players">
+                <option [value]="player.playerId">{{player.fullName}}</option>
+              </ng-container>
+            </select>
+            <!--<label *ngIf="FirstName.invalid && FirstName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <button type="button" class="btn btn-lg btn-primary btn-block" (click)="goToRegistration()">Register</button>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <button class="btn btn-lg btn-primary btn-block" (click)="onSubmit()">Login</button>
-            </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <button type="button" class="btn btn-lg btn-light btn-block" (click)="goToMaster()">Back</button>
           </div>
         </div>
-      </form>
+        <div class="col-md-6">
+          <div class="form-group">
+            <button type="button" class="btn btn-lg btn-primary btn-block" (click)="onSubmit()">Save</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -24,7 +24,13 @@ namespace Capstone.Controllers
 		[HttpGet]
 		public ActionResult<IEnumerable<Questionnaire>> GetQuestionnaire()
 		{
-			List<Questionnaire> items = _context.Questionnaire.ToList();
+			List<Questionnaire> items = _context.Questionnaire
+				.Include(x => x.Player)
+				.ToList();
+			items.ForEach(x =>
+			{
+				x.FullName = x.Player.FirstName + " " + x.Player.LastName;
+			});
 			return items;
 		}
 
@@ -33,6 +39,7 @@ namespace Capstone.Controllers
         public ActionResult<Questionnaire> GetQuestionnaire(long id)
         {
 			Questionnaire item = _context.Questionnaire
+				.Include(x => x.Player)
 				.Where(x => x.QuestionnaireId == id)
 				.FirstOrDefault();
 
@@ -40,6 +47,8 @@ namespace Capstone.Controllers
             {
                 return NotFound();
             }
+
+			item.FullName = item.Player.FirstName + " " + item.Player.LastName;
 
             return item;
         }

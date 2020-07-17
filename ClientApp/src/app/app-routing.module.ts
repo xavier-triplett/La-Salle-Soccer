@@ -18,6 +18,8 @@ import { CoachMasterComponent } from './coachs/coach-master.component';
 import { CoachDetailComponent } from './coachs/coach-detail.component';
 import { ParentMasterComponent } from './parents/parent-master.component';
 import { ParentDetailComponent } from './parents/parent-detail.component';
+import { QuestionnaireMasterComponent } from './questionnaire/questionnaire-master.component';
+import { QuestionnaireDetailComponent } from './questionnaire/questionnaire-detail.component';
 
 const routes: Routes = [
 	{
@@ -100,6 +102,16 @@ const routes: Routes = [
 	{
 		path: 'users/item/:id',
 		component: UserDetailComponent,
+		canActivate: [AuthGuard] //TODO: Add admin permission as well
+	},
+	{
+		path: 'questionnaires',
+		component: QuestionnaireMasterComponent,
+		canActivate: [AuthGuard]   //TODO: Add admin permission as well
+	},
+	{
+		path: 'questionnaires/item/:id',
+		component: QuestionnaireDetailComponent,
 		canActivate: [AuthGuard] //TODO: Add admin permission as well
 	},
 ];

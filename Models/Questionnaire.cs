@@ -32,5 +32,9 @@ namespace Capstone.Models
 		public DateTime OutOfStateTime { get; set; }
 		public DateTime PickUpTime { get; set; }
 
+
+		[NotMapped]
+		public string FullName { get; set; }
+
 	}
 }

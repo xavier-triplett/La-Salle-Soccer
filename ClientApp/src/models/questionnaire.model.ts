@@ -14,5 +14,8 @@ export class Questionnaire {
 	shortnessOfBreath: boolean;
 	covidContact: boolean;
 	outOfStateTime: Date;
-	PickUpTime;
+	pickUpTime: Date;
+
+	//Not Mapped
+	fullName: string;
 }

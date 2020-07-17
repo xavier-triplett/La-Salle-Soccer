@@ -42,7 +42,7 @@ export class ParentDetailComponent implements OnInit {
 			this.players = res;
 		},
 			err => {
-				this._toastr.error("Failed to get teams. Reason: " + err.statusText);
+				this._toastr.error("Failed to get players. Reason: " + err.statusText);
 			});
 
 		this._userService.getUsers().then(res => {

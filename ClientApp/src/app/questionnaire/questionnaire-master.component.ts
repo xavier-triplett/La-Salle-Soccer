@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Questionnaire } from '../../models/questionnaire.model';
+import { QuestionnaireService } from '../../services/questionnaire.service';
 
 @Component({
 	selector: 'app-questionnaire-master',
@@ -12,50 +14,35 @@ import { AuthService } from '../../services/auth.service';
 	styleUrls: ['./questionnaire-master.component.scss']
 })
 export class QuestionnaireMasterComponent implements OnInit {
-	@Input() title: string = "Questionnaires";
-	@Input() useId: boolean = false;
-
-	//public questionnaires: Questionnaire[] = [];
-	//public questionnairesToDelete: Questionnaire[] = [];
+	public questionnaires: Questionnaire[] = [];
+	public questionnairesToDelete: Questionnaire[] = [];
 	public userId: number = 0;
 
 	constructor(
-		//private _data: QuestionnaireService,
+		private _data: QuestionnaireService,
 		private _auth: AuthService,
 		private _toastr: ToastrService,
 		private _router: Router
 	) { }
 
 	ngOnInit() {
-		//this.reload();
+		this.reload();
 	}
 
 	goToDetail(id: number) {
-		if (this.useId) this._router.navigateByUrl('questionnaires/item/' + id + '/' + 1);
-		else this._router.navigateByUrl('questionnaires/item/' + id + '/' + 0);
+		this._router.navigateByUrl('questionnaires/item/' + id );
 	}
 
-    /*
 	reload() {
 		this.questionnairesToDelete = [];
 		this.questionnaires = [];
 
-		if (this.useId) {
-			this.userId = this._auth.currentUserId;
-			this._data.getUsersQuestionnaire(this.userId).then(res => {
-				this.questionnaires = res;
-			},
-				err => {
-					this._toastr.error("Failed to get users questionnaires. Reason: " + err.statusText);
-				});
-		} else {
-			this._data.getQuestionnaires().then(res => {
-				this.questionnaires = res;
-			},
-				err => {
-					this._toastr.error("Failed to get questionnaires. Reason: " + err.statusText);
-				});
-		}
+		this._data.getQuestionnaires().then(res => {
+			this.questionnaires = res;
+		},
+			err => {
+				this._toastr.error("Failed to get questionnaires. Reason: " + err.statusText);
+		});
 	}
 
 	get deleteValid() {
@@ -81,5 +68,4 @@ export class QuestionnaireMasterComponent implements OnInit {
 				});
 		});
 	}
-  */
 }

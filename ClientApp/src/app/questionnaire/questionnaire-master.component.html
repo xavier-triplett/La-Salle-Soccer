@@ -1,8 +1,8 @@
 <div class="jumbotron">
-  <h1 class="display-4 text-center">{{title}}</h1>
+  <h1 class="display-4 text-center">Questionnaires</h1>
   <div class="row">
     <div class="col-md-8"></div>
-    <div class="col-md-4 float-right"><button class="btn btn-primary mb-2" (click)="goToDetail(0)">Add New Questionnaire</button><button class="btn btn-danger mb-2 ml-2" [disabled]="!deleteValid" (click)="deleteGames()">Delete Selected Games</button></div>
+    <div class="col-md-4 float-right"><button class="btn btn-primary mb-2" (click)="goToDetail(0)">Add New Questionnaire</button><button class="btn btn-danger mb-2 ml-2" [disabled]="!deleteValid" (click)="deleteQuestionnaires()">Delete Selected Questionnaires</button></div>
   </div>
   <div class="container">
     <div class="row">
@@ -12,22 +12,16 @@
             <tr>
               <th scope="col"></th>
               <th scope="col"></th>
-              <th scope="col">Home Team</th>
-              <th scope="col">Away Team</th>
-              <th scope="col">Home Score</th>
-              <th scope="col">Away Score</th>
+              <th scope="col">Player</th>
             </tr>
           </thead>
           <tbody>
-            <ng-container *ngFor="let game of games">
+            <ng-container *ngFor="let questionnaire of questionnaires">
               <tr>
-                <td *ngIf="!containsGame(game)"><input type="checkbox" (click)="gamesToDelete.push(game)" /></td>
-                <td *ngIf="containsGame(game)"><input type="checkbox" (click)="removeGame(game)" checked /></td>
-                <td><button class="btn btn-primary" (click)="goToDetail(game.gameId)">Edit</button></td>
-                <td>{{game.homeTeamName}}</td>
-                <td>{{game.awayTeamName}}</td>
-                <td>{{game.homeGoals}}</td>
-                <td>{{game.awayGoals}}</td>
+                <td *ngIf="!containsQuestionnaire(questionnaire)"><input type="checkbox" (click)="questionnairesToDelete.push(questionnaire)" /></td>
+                <td *ngIf="containsQuestionnaire(questionnaire)"><input type="checkbox" (click)="removeQuestionnaire(questionnaire)" checked /></td>
+                <td><button class="btn btn-primary" (click)="goToDetail(questionnaire.questionnaireId)">Edit</button></td>
+                <td>{{questionnaire.fullName}}</td>
               </tr>
             </ng-container>
           </tbody>
