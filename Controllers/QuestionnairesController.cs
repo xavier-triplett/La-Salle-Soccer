@@ -16,7 +16,7 @@ namespace Capstone.Controllers
         private readonly DBContext _context;
 
         public QuestionnairesController(DBContext context)
-        {
+        {								
             _context = context;
         }
 

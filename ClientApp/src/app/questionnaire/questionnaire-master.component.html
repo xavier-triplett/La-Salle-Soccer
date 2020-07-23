@@ -12,7 +12,10 @@
             <tr>
               <th scope="col"></th>
               <th scope="col"></th>
+              <th scope="col">Date And Time</th>
               <th scope="col">Player</th>
+              <th scope="col">Temperature</th>
+              <th scope="col">Fever</th>
             </tr>
           </thead>
           <tbody>
@@ -21,7 +24,10 @@
                 <td *ngIf="!containsQuestionnaire(questionnaire)"><input type="checkbox" (click)="questionnairesToDelete.push(questionnaire)" /></td>
                 <td *ngIf="containsQuestionnaire(questionnaire)"><input type="checkbox" (click)="removeQuestionnaire(questionnaire)" checked /></td>
                 <td><button class="btn btn-primary" (click)="goToDetail(questionnaire.questionnaireId)">Edit</button></td>
+                <td>{{questionnaire.practiceTime}}</td>
                 <td>{{questionnaire.fullName}}</td>
+                <td>{{questionnaire.temperature}}</td>
+                <td>{{questionnaire.fever}}</td>
               </tr>
             </ng-container>
           </tbody>

@@ -20,11 +20,11 @@ namespace Capstone.Models
 		public long GameId { get; set; }
 		public long HomeTeamId { get; set; }
 		public long AwayTeamId { get; set; }
-		public Nullable<System.DateTime> DateAndTime { get; set; }
-		public Nullable<int> HomeGoals { get; set; }
-		public Nullable<int> AwayGoals { get; set; }
-		public Nullable<int> HomePenaltyGoals { get; set; }
-		public Nullable<int> AwayPenaltyGoals { get; set; }
+		public DateTime? DateAndTime { get; set; }
+		public int? HomeGoals { get; set; }
+		public int? AwayGoals { get; set; }
+		public int? HomePenaltyGoals { get; set; }
+		public int? AwayPenaltyGoals { get; set; }
 
 		[NotMapped]
 		public string HomeTeamName { get; set; }

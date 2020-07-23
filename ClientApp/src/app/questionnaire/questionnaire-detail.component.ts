@@ -69,7 +69,6 @@ export class QuestionnaireDetailComponent implements OnInit {
 	}
 
 	onSubmit() {
-		this.data.questionnaireId = +this.data.questionnaireId;
 		this.data.playerId = +this.data.playerId;
 		if (this.dataId == 0) {
 			this._data.postQuestionnaire(this.data).then(res => {
