@@ -30,7 +30,7 @@ namespace Capstone.Controllers
 			items.ForEach(x =>
 			{
 				x.FullName = x.Player.FirstName + " " + x.Player.LastName;
-			});
+			});				   
 			return items;
 		}
 

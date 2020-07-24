@@ -71,7 +71,7 @@
         <div class="col-md-3">
           <div class="form-group">
             <label>Temperature</label>
-            <input name="Temperature" #Temperature="ngModel" [(ngModel)]="data.temperature" class="form-control" required />
+            <input name="Temperature" #Temperature="ngModel" [(ngModel)]="data.temperature" class="form-control" type="number" required/>
             <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
@@ -115,7 +115,7 @@
         <div class="col-md-3">
           <div class="form-group">
             <label>Last time out of state?</label>
-            <input name="StateTime" #StateTime="ngModel" [(ngModel)]="data.outOfStateTime" class="form-control" type="date" required />
+            <input name="State" #State="ngModel" [(ngModel)]="outOfStateDate" class="form-control" type="date" required />
             <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>

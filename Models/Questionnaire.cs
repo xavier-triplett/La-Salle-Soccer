@@ -24,7 +24,7 @@ namespace Capstone.Models
 		public string CoachPhone { get; set; }
 		public string EmergencyContact { get; set; }
 		public string EmergencyPhone { get; set; }
-		public double? Temperature { get; set; }
+		public Decimal? Temperature { get; set; }
 		public Boolean? Fever { get; set; }
 		public Boolean? PastFever { get; set; }
 		public Boolean? Cough { get; set; }

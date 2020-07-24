@@ -7,11 +7,13 @@ import { UserService } from '../../services/user.service';
 import { AddressService } from '../../services/address.service';
 import { Address } from '../../models/address.model';
 import * as moment from 'moment';
+import { DatePipe } from '@angular/common'
 
 @Component({
 	selector: 'app-user-detail',
 	templateUrl: './user-detail.component.html',
-	styleUrls: ['./user-detail.component.scss']
+	styleUrls: ['./user-detail.component.scss'],
+	providers: [DatePipe]
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
 	@Input() title: string = "New User";
@@ -20,6 +22,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 	public verifiedPassword: string;
 	public data: User = new User;
 	public address: Address = new Address;
+	public dobDate: string;
 	private routeSub: Subscription;
 
 	constructor(
@@ -27,7 +30,8 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 		private _addressService: AddressService,
 		private _toastr: ToastrService,
 		private _router: Router,
-		private _route: ActivatedRoute
+		private _route: ActivatedRoute,
+		private _dataPipe: DatePipe
 	) { }
 
 	ngOnInit() {
@@ -57,6 +61,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 				this._addressService.getAddress(this.data.addressId).then(result => {
 					this.address = result;
 					this.verifiedPassword = this.data.password;
+					this.dobDate = this._dataPipe.transform(this.data.dateOfBirth, "yyyy-MM-dd");
 				},
 				err => {
 					this._toastr.error("Failed to get address. Reason: " + err.statusText);
@@ -70,6 +75,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
 	onSubmit() {
 		this.address.zip = +this.address.zip;
+		this.data.dateOfBirth = new Date(this.dobDate);
 		if (this.data.password != this.verifiedPassword) {
 			this._toastr.error("Passwords must match. Please double check them");
 			return;
