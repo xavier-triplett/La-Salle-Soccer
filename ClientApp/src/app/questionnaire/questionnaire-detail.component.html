@@ -41,7 +41,7 @@
         <div class="col-md-3">
           <div class="form-group">
             <label>Drop Off Time</label>
-            <input name="DropOff" #DropOff="ngModel" [(ngModel)]="data.dropOffTime" class="form-control" type="time" required />
+            <input name="DropOff" #DropOff="ngModel" [(ngModel)]="dropOffTime" class="form-control" type="time" required />
             <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
@@ -122,7 +122,7 @@
         <div class="col-md-3">
           <div class="form-group">
             <label>Pick Up Time</label>
-            <input name="PickUpTime" #PickUpTime="ngModel" [(ngModel)]="data.pickUpTime" class="form-control" type="time" required />
+            <input name="PickUpTime" #PickUpTime="ngModel" [(ngModel)]="pickUpTime" class="form-control" type="time" required />
             <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>

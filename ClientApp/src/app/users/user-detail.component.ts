@@ -31,7 +31,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 		private _toastr: ToastrService,
 		private _router: Router,
 		private _route: ActivatedRoute,
-		private _dataPipe: DatePipe
+		private _datePipe: DatePipe
 	) { }
 
 	ngOnInit() {
@@ -61,7 +61,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 				this._addressService.getAddress(this.data.addressId).then(result => {
 					this.address = result;
 					this.verifiedPassword = this.data.password;
-					this.dobDate = this._dataPipe.transform(this.data.dateOfBirth, "yyyy-MM-dd");
+					this.dobDate = this._datePipe.transform(this.data.dateOfBirth, "yyyy-MM-dd");
 				},
 				err => {
 					this._toastr.error("Failed to get address. Reason: " + err.statusText);
@@ -74,7 +74,6 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 	}
 
 	onSubmit() {
-		this.address.zip = +this.address.zip;
 		this.data.dateOfBirth = new Date(this.dobDate);
 		if (this.data.password != this.verifiedPassword) {
 			this._toastr.error("Passwords must match. Please double check them");

@@ -27,7 +27,8 @@
                 <td>{{questionnaire.practiceTime}}</td>
                 <td>{{questionnaire.fullName}}</td>
                 <td>{{questionnaire.temperature}}</td>
-                <td>{{questionnaire.fever}}</td>
+                <td *ngIf="questionnaire.fever; else NoFever">Yes</td>
+                <ng-template #NoFever><td>No</td></ng-template>
               </tr>
             </ng-container>
           </tbody>

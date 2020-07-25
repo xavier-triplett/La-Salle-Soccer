@@ -23,14 +23,14 @@
         <div class="col-md-4">
           <div class="form-group">
             <label>Username</label>
-            <input name="UserName" #UserName="ngModel" [(ngModel)]="data.username" class="form-control" required />
+            <input name="UserName" #UserName="ngModel" [(ngModel)]="user.username" class="form-control" required />
             <!--<label *ngIf="LastName.invalid && LastName.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
             <label>Password</label>
-            <input name="Password" #Password="ngModel" type="password" [(ngModel)]="data.password" class="form-control" required />
+            <input name="Password" #Password="ngModel" type="password" [(ngModel)]="user.password" class="form-control" required />
             <!--<label *ngIf="Username.invalid && Username.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>
@@ -103,7 +103,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <label>ZIP</label>
-            <input name="ZIP" #ZIP="ngModel" [(ngModel)]="address.zip" class="form-control" required />
+            <input name="ZIP" #ZIP="ngModel" [(ngModel)]="address.zip" class="form-control" type="number" required />
             <!--<label *ngIf="Password.invalid && Password.touched" class="validation-error">This field is required</label>-->
           </div>
         </div>

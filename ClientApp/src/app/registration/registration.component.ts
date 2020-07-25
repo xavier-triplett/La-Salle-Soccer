@@ -45,11 +45,11 @@ export class RegistrationComponent implements OnInit {
 	}
 
 	onSubmit() {
-		this.address.zip = +this.address.zip;
 		if (this.user.password != this.verifiedPassword) {
 			this._toastr.error("Passwords must match. Please double check them");
 			return;
 		}
+		console.log("test");
 		this._addressService.addressExists(this.address.addressLine1, this.address.city, this.address.state, this.address.zip).then(res => {
 			if (res > 0) {
 				this.user.addressId = res;

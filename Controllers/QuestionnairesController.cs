@@ -25,11 +25,11 @@ namespace Capstone.Controllers
 		public ActionResult<IEnumerable<Questionnaire>> GetQuestionnaire()
 		{
 			List<Questionnaire> items = _context.Questionnaire
-				.Include(x => x.Player)
+				.Include(x => x.Player.User)
 				.ToList();
 			items.ForEach(x =>
 			{
-				x.FullName = x.Player.FirstName + " " + x.Player.LastName;
+				x.FullName = x.Player.User.FirstName + " " + x.Player.User.LastName;
 			});				   
 			return items;
 		}
@@ -39,7 +39,7 @@ namespace Capstone.Controllers
         public ActionResult<Questionnaire> GetQuestionnaire(long id)
         {
 			Questionnaire item = _context.Questionnaire
-				.Include(x => x.Player)
+				.Include(x => x.Player.User)
 				.Where(x => x.QuestionnaireId == id)
 				.FirstOrDefault();
 
@@ -48,7 +48,7 @@ namespace Capstone.Controllers
                 return NotFound();
             }
 
-			item.FullName = item.Player.FirstName + " " + item.Player.LastName;
+			item.FullName = item.Player.User.FirstName + " " + item.Player.User.LastName;
 
             return item;
         }
