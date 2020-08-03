@@ -24,6 +24,7 @@ export class QuestionnaireDetailComponent implements OnInit {
 	public outOfStateDate: string;
 	public dropOffTime: string;
 	public pickUpTime: string;
+	public anotherQuestionnaire: boolean = false;
 	private routeSub: Subscription;
    
 
@@ -55,6 +56,30 @@ export class QuestionnaireDetailComponent implements OnInit {
 		this.routeSub.unsubscribe();
 	}
 
+
+	onChange(inputName: string) {
+		if (inputName == "practiceTime") {
+			this.data.dropOffTime = this.data.practiceTime;
+			this.data.pickUpTime = this.data.dropOffTime;
+		} else if (inputName == "dropOffTime") {
+      //Change pickup time to be an hour later
+		}
+	}
+
+	clearOldQuestionnaire() {
+		this.data.playerId = null;
+		this.data.emergencyContact = null;
+		this.data.emergencyPhone = null;
+		this.data.fever = null;
+		this.data.pastFever = null;
+		this.data.temperature = null;
+		this.data.cough = null;
+		this.data.shortnessOfBreath = null;
+		this.data.covidContact = null;
+		this.data.outOfState = null;
+		this.outOfStateDate = null;
+	}
+
 	goToMaster() {
 		this._router.navigateByUrl('questionnaires');
 	}
@@ -69,26 +94,6 @@ export class QuestionnaireDetailComponent implements OnInit {
 				this.data = res;
 				this.dataId = res.questionnaireId;
 				this.outOfStateDate = this._datePipe.transform(this.data.outOfState, "yyyy-MM-dd");
-				/*this.dropOffTime = moment(this.data.dropOffTime).toDate().toLocaleTimeString().trim();
-				this.pickUpTime = moment(this.data.pickUpTime).toDate().toLocaleTimeString().trim();
-				if (this.dropOffTime.includes('PM')) {
-					this.dropOffTime = this.dropOffTime.replace('PM', '').trim();
-					var str: string = this.dropOffTime.substr(0, this.dropOffTime.indexOf(':'));
-					var num: number = +str;
-					num += 12;
-					this.dropOffTime = num.toString() + this.dropOffTime.substr(this.dropOffTime.indexOf(':'), this.dropOffTime.length);
-				} else {
-					this.dropOffTime = this.dropOffTime.replace('AM', '').trim();
-				}
-				if (this.pickUpTime.includes('PM')) {
-					this.pickUpTime = this.pickUpTime.replace('PM', '').trim();
-					var str: string = this.pickUpTime.substr(0, this.pickUpTime.indexOf(':'));
-					var num: number = +str;
-					num += 12;
-					this.pickUpTime = num.toString() + this.pickUpTime.substr(this.pickUpTime.indexOf(':'), this.pickUpTime.length);
-				} else {
-					this.pickUpTime = this.pickUpTime.replace('AM', '').trim();
-				}*/
 			},
 				err => {
 					this._toastr.error("Failed to get questionnaire. Reason: " + err.statusText);
@@ -99,13 +104,19 @@ export class QuestionnaireDetailComponent implements OnInit {
 	onSubmit() {
 		this.data.playerId = +this.data.playerId;
 		this.data.outOfState = new Date(this.outOfStateDate);
-		/*this.data.dropOffTime = new Date(this._datePipe.transform(this.data.practiceTime, "yyyy-MM-dd") + " " + this.dropOffTime);
-		this.data.pickUpTime = new Date(this._datePipe.transform(this.data.practiceTime, "yyyy-MM-dd") + " " + this.pickUpTime);*/
+		if (this.data.playerId == null || this.data.playerId == 0) {
+			this._toastr.error("Player is required.");
+			return;
+		}
 		if (this.dataId == 0) {
 			this._data.postQuestionnaire(this.data).then(res => {
 				this._toastr.success("Successfully created questionnaire.", "Success");
 				this.reload();
-				this.goToDetail(res.questionnaireId);
+				if (!this.anotherQuestionnaire) {
+					this.goToDetail(res.questionnaireId);
+				} else {
+					this.clearOldQuestionnaire();
+				}
 			},
 				err => {
 					this._toastr.error("Failed to create questionnaire. Reason: " + err.statusText);
