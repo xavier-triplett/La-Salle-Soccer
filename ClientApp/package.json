@@ -20,7 +20,7 @@
     "@angular/platform-browser-dynamic": "~8.2.9",
     "@angular/router": "~8.2.9",
     "cors": "^2.8.5",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "mustache": "^3.1.0",
     "ngx-toastr": "^11.2.1",
     "rxjs": "^6.4.0",
